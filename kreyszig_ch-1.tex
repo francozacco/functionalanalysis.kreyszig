@@ -1,0 +1,223 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{adjustbox}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[mathscr]{euscript}
+
+\title{\textbf{Solved selected problems of Introductory functional analysis with applications - Erwin Kreyszig}}
+\author{Franco Zacco}
+\date{}
+
+\addtolength{\topmargin}{-3cm}
+\addtolength{\textheight}{3cm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\diam}{\text{diam}}
+\newcommand{\cl}{\text{cl}}
+\newcommand{\bdry}{\text{bdry}}
+\newcommand{\inter}{\text{int}}
+
+\theoremstyle{definition}
+\newtheorem*{solution*}{Solution}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\section*{Chapter 1 - Metric Spaces}
+\subsection*{1.2 - Further Examples of Metric Spaces}
+\begin{proof}{\textbf{4}}
+    Let us consider a sequence $x_n = 1/\log(n)$ we see that\\
+    $\lim_{n \to \infty}1/\log(n) = 0$ but
+    $\sum_{n=1}^\infty |1/\log(n)|^p$ diverges for any $1 \leq p < \infty$
+    therefore $x_n \not\in l^p$.
+\end{proof}
+\begin{proof}{\textbf{5}}
+    Let us consider a sequence $x_n = 1/n$ we see that
+    $\sum_{n=1}^\infty \left|1/n\right|$ diverges so $x_n \not\in l^1$ but
+    $\sum_{n=1}^\infty |1/n|^p$ doesn't diverge,
+    therefore $x_n \in l^p$ for any $1 < p < \infty$.
+\end{proof}
+\subsection*{1.3 -  Open Set, Closed Set, Neighborhood}
+\begin{proof}{\textbf{13}}
+\begin{itemize}
+    \item [($\Rightarrow$)] Let $X$ be a separable metric space then $X$
+    has a countable dense set $Y$. Let $x \in X$ we know that for each
+    neighborhood of $x$ no matter how small there is a point $y \in Y$
+    which is in this neighborhood hence for every $\epsilon > 0$ there is
+    $y\in Y$ such that $d(x,y) < \epsilon$.
+
+    \item [($\Leftarrow$)] Let $Y\subseteq X$ be a countable subset with the
+    property that for each $\epsilon > 0$ and every $x \in X$ there is
+    $y \in Y$ such that $d(x,y) < \epsilon$. We want to prove that $Y$
+    is dense in $X$.
+
+    Let $x \in X$ and $\epsilon > 0$ then from the property we have, there is
+    $y \in Y$ such that $d(x,y) <\epsilon$ which implies that
+    $y \in B(x, \epsilon)$ hence $x$ is an accumulation point of $Y$ but since
+    $x$ was arbitrary then every point of $X$ is in the closure of $Y$ i.e.
+    $\overline{Y} = X$ hence $Y$ is dense in $X$ and since it's also countable
+    then $X$ is separable.      
+\end{itemize}
+\end{proof}
+\cleardoublepage
+\subsection*{1.4 -  Examples. Completeness Proofs}
+\begin{proof}{\textbf{3}}
+    Let $M \subset l^\infty$ be the subspace consisting of all sequences
+    $x = (\varepsilon_j)$ with at most finitely many nonzero terms we want to
+    show $M$ is not complete.
+
+    Let us take a sequence $(x_n) \subset M$ where each $x_n$ is of the form
+    $x_n = (1, 1/2, ..., 1/n, 0, 0, ...)$ i.e. the first $n$ elements are 
+    $1, 1/2, ..., 1/n$ and the rest infinitely many are $0$s.
+    Then given $\epsilon > 0$ we can find $N \in \N$ such that when
+    $m, n> N$ we have that $d(x_n, x_m) < \epsilon$ since
+    \begin{align*}
+        d(x_n, x_m) = \sup_j |\varepsilon_j^{(m)} - \varepsilon_j^{(n)}|
+        = \left|\frac{1}{m} - 0\right| < \epsilon
+    \end{align*}
+    assuming $m > n > N$ so $(x_n)$ is a Cauchy sequence on $M$.
+
+    Now we want to prove this sequence converges to
+    $x = (1, 1/2, 1/3, ...) = (1/n)$. Let $\epsilon > 0$ then we can find
+    $N \in \N$ such that when $n \geq N$ we have that
+    \begin{align*}
+        d(x_n, x) = \sup_j |\varepsilon_j^{(n)} - \varepsilon_j|
+        = \left|0 - \frac{1}{n+1}\right| < \epsilon
+    \end{align*}
+    Thus $(x_n)$ converges to $x$ but $x \not\in M$ since $x$ has
+    infinitely many nonzero elements. Therefore $M$ is not complete.
+\end{proof}
+\begin{proof}{\textbf{4}}
+    We saw in the problem $3$ that a sequence $(x_n) \subset M$
+    where each $x_n$ is of the form $x_n = (1, 1/2, ..., 1/n, 0, 0, ...)$
+    tends to $x = (1, 1/2, 1/3, ...) = (1/n)$. But $x \not\in M$ since $x$ has
+    infinitely many nonzero elements then by Theorem 1.4-6 (b) we have that
+    $M$ is not closed, therefore since $M$ is not closed then $M$ is not
+    complete in $l^{\infty}$ by Theorem 1.4-7. 
+\end{proof}
+\begin{proof}{\textbf{8}}
+    Let $Y \subset C[a,b]$ be the set of $x \in C[a,b]$ such that $x(a) = x(b)$.
+    We want to prove that $Y$ is complete.
+
+    Let $(x_n) \subseteq Y$ be a sequence such that $x_n \to x$ we want to prove
+    that $x \in Y$. Let $\epsilon > 0$ then there is $N \in \N$ such that when
+    $n \geq N$ we have that
+    \begin{align*}
+        d(x_n, x) = \max_{t \in [a,b]} |x_n(t) - x(t)| < \epsilon
+    \end{align*}
+    Then $|x_n(t) - x(t)| < \epsilon$ for every $t \in [a,b]$.
+    Let us take $n = N$ then by the triangle inequality for numbers we have that 
+    \begin{align*}
+        |x(a) - x(b)| &\leq |x(a) - x_N(a)| + |x_N(a) - x(b)|\\
+            &\leq |x(a) - x_N(a)| + |x_N(a) - x_N(b)| + |x_N(b) - x(b)|\\
+            &< 2\epsilon
+    \end{align*}
+    This implies that $x(a) = x(b)$. Therefore $x \in Y$ which implies that
+    $Y$ is closed in $C[a,b]$ by Theorem 1.4-6(b) and finally by Theorem 1.4-7
+    we have that $Y$ is complete.
+\end{proof}
+\cleardoublepage
+\subsection*{1.6 - Completion of Metric Spaces}
+\begin{proof}{\textbf{10}}
+    Let $(x_n)$ and $(x_n')$ be convergent sequences in a metric space $(X,d)$
+    where they have the same limit $l$. We want to prove that
+    $$\lim_{n\to\infty} d(x_n, x_n') = 0$$
+    Let $\epsilon/2 > 0$ then there is $N,N' \in \N$ such that when
+    $n\geq N$ we have that $d(x_n, l) < \epsilon/2$
+    and when $m\geq N'$ we have that $d(x_m', l) < \epsilon/2$. Let us take 
+    $M = \max(N, N')$ then when $n \geq M$ we have that $d(x_n, l) < \epsilon/2$
+    and that $d(x_n', l) < \epsilon/2$. So by applying the triangle inequality
+    to $d(x_n, x_n')$ we have that
+    \begin{align*}
+        d(x_n, x_n') \leq d(x_n, l) + d(x_n', l) < \epsilon
+    \end{align*}
+    but also since $d(x_n, x_n') \geq 0$ we must have that
+    \begin{align*}
+        -\epsilon < -(d(x_n, l) + d(x_n', l)) < d(x_n, x_n')
+    \end{align*}
+    Adding both results we get that
+    \begin{align*}
+        |d(x_n,x_n') - 0| = |d(x_n,x_n')| < \epsilon
+    \end{align*}
+    Which implies that $\lim_{n\to\infty} d(x_n, x_n') = 0$.
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{11}} Let $Y$ be the set of all Cauchy sequences of
+    elements of $X$, we want to prove that
+    $\lim_{n\to\infty} d(x_n, x_n') = 0$
+    defines an equivalence relation on $Y$.
+    \begin{itemize}
+        \item [(a)] Let $(x_n) \in Y$ then we see that
+        \begin{align*}
+            \lim_{n\to\infty} d(x_n, x_n) = 0
+        \end{align*}
+        which implies that $\lim_{n\to\infty} d(x_n, x_n') = 0$ is reflexive.
+        \item [(b)] Let $(x_n), (x_n') \in Y$ such that 
+        $\lim_{n\to\infty} d(x_n, x_n') = 0$ then by the
+        properties of the metric $d$ we have that $\lim_{n\to\infty} d(x_n', x_n) = 0$
+        is also true. Then the relation is also symmetric. 
+        \item [(c)] Let $(x_n), (y_n), (z_n) \in Y$ such that
+        $$\lim_{n\to\infty} d(x_n, y_n) = 0 \quad\text{and}\quad
+        \lim_{n\to\infty} d(y_n, z_n) = 0$$
+        This implies that given $\epsilon/2 > 0$ there are some
+        $N, N' \in \N$ such that when $n \geq N$ we have that
+        $|d(x_n, y_n)| < \epsilon/2$ and when $n \geq N'$ we have that
+        $|d(y_{n}, z_{n})| < \epsilon/2$. Let us select $M = \max(N, N')$
+        then when $n \geq M$ we have that $|d(x_{n}, y_{n})| < \epsilon/2$
+        and $|d(y_{n}, z_{n})| < \epsilon/2$.
+
+        But also by the triangle inequality for metrics, we know that
+        \begin{align*}
+            d(x_n,z_n) \leq d(x_n,y_n) + d(y_n,z_n) < \epsilon
+        \end{align*}
+        Also, since $d(x_n, z_n) \geq 0$ we must have that
+        \begin{align*}
+            -\epsilon < -(d(x_n, y_n) + d(y_n, z_n)) < d(x_n, z_n)
+        \end{align*}
+        Adding both results we get that
+        \begin{align*}
+            |d(x_n, z_n) - 0| = |d(x_n,z_n)| < \epsilon
+        \end{align*}
+        Which implies that $\lim_{n\to\infty} d(x_n, z_n) = 0$
+        and hence the relation is also transitive.
+    \end{itemize}
+    Therefore $\lim_{n\to\infty} d(x_n, x_n') = 0$ defines an equivalence
+    relation on $Y$.
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{12}}
+    Let $(x_n) \subseteq (X,d)$ be a Cauchy sequence and let
+    $(x_n') \subseteq (X,d)$ such that $\lim_{n\to\infty} d(x_n, x_n') = 0$,
+    we want to show that $(x_n')$ is also Cauchy.
+    Let $\epsilon / 3 > 0$ then since $(x_n)$ is Cauchy we know there is
+    $N \in \N$ such that when $n,m \geq N$ we have that
+    \begin{align*}
+        d(x_n, x_m) < \epsilon / 3
+    \end{align*}
+    Also, we know that for the same $\epsilon /3>0$ there is $N' \in \N$ such
+    that when $n \geq N'$ we have that
+    \begin{align*}
+        d(x_n, x_n') = |d(x_n, x_n') - 0| < \epsilon / 3
+    \end{align*}
+    On the other hand, by the triangle inequality applied twice, we know that
+    \begin{align*}
+        d(x_n', x_m') &\leq d(x_n', x_n) + d(x_n, x_m')\\
+            &\leq  d(x_n', x_n) + d(x_n, x_m) + d(x_m, x_m')
+    \end{align*}
+    So if we take $M = \max(N, N')$ when $n,m \geq M$ we have that
+    \begin{align*}
+        d(x_n', x_m') &\leq  d(x_n', x_n) + d(x_n, x_m) + d(x_m, x_m') < \epsilon
+    \end{align*}
+    This implies that $(x_n')$ is also Cauchy as we wanted.
+\end{proof}
+\end{document}
