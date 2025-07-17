@@ -1,0 +1,602 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{adjustbox}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[mathscr]{euscript}
+
+\title{\textbf{Solved selected problems of Introductory functional analysis with applications - Erwin Kreyszig}}
+\author{Franco Zacco}
+\date{}
+
+\DeclareSymbolFontAlphabet{\mathscrsfs}{rsfs}
+\addtolength{\topmargin}{-3cm}
+\addtolength{\textheight}{3cm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\diam}{\text{diam}}
+\newcommand{\cl}{\text{cl}}
+\newcommand{\bdry}{\text{bdry}}
+\newcommand{\inter}{\text{int}}
+\newcommand{\dom}{\mathscrsfs{D}}
+\newcommand{\range}{\mathscrsfs{R}}
+\newcommand{\nullsp}{\mathscrsfs{N}}
+\newcommand{\inprd}[1]{\langle{#1}\rangle}
+\newcommand{\re}[1]{\text{Re}{#1}}
+\newcommand{\im}[1]{\text{Im}{#1}}
+
+
+\theoremstyle{definition}
+\newtheorem*{solution*}{Solution}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\section*{Chapter 3 - Inner Product Spaces. Hilbert Spaces}
+\subsection*{3.1 - Inner Product Space. Hilbert Space}
+\begin{proof}{\textbf{1}}
+Let us prove (4) as follows
+\begin{align*}
+    \|x+y\|^2 + \|x-y\|^2 &= \inprd{x+y, x+y} + \inprd{x-y, x-y}\\
+    &=\inprd{x, x} + \inprd{x, y} + \inprd{y, x} + \inprd{y, y}
+    + \inprd{x, x} - \inprd{x, y} - \inprd{y, x} + \inprd{y, y}\\
+    &=2\inprd{x, x} + 2\inprd{y, y}\\
+    &=2(\|x\|^2 + \|y\|^2)
+\end{align*}
+Where we used the definition of the norm $\|x\| = \sqrt{\inprd{x,x}}$ and
+the distributive property of the inner products.
+\end{proof}
+\begin{proof}{\textbf{2}}
+Let $x \perp y$ in an inner product space $X$ then
+\begin{align*}
+    \|x + y\|^2 &= \inprd{x+y, x+y}\\
+    &= \inprd{x, x} + \inprd{x,y} + \inprd{y,x} + \inprd{y,y}\\
+    &= \inprd{x, x} + \inprd{y, y}\\
+    &= \|x\|^2 + \|y\|^2
+\end{align*}
+Where we used that $\inprd{x,y} = \inprd{y,x} = 0$ since $x \perp y$.
+
+Suppose now we have $m$ mutually orthogonal vectors, i.e.
+$x_1 \perp x_2 \perp ... \perp x_m$ then
+\begin{align*}
+    \|x_1 + x_2 + ... + x_m\|^2 &= \inprd{x_1 + x_2 + ... + x_m, x_1 + x_2 + ... + x_m}\\
+    &= \inprd{x_1, x_1} + \inprd{x_1,x_2} +  ...  +\inprd{x_m,x_{m-1}} + \inprd{x_m,x_m}\\
+    &= \inprd{x_1, x_1} + \inprd{x_2, x_2} + ... + \inprd{x_m, x_m}\\
+    &= \|x_1\|^2 + \|x_2\|^2 + ... + \|x_m\|^2
+\end{align*}
+Where we used that $\inprd{x_i,x_j} = 0$ for $i \neq j$ since they are
+orthogonal.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{3}}
+Let $x,y \in \R$ and suppose we have the following property
+$$\|x + y\|^2 = \|x\|^2 + \|y\|^2$$
+then since $\|x\|^2 = \inprd{x,x}$ above equation implies that
+\begin{align*}
+    \inprd{x +y, x +y} &= \inprd{x,x} + \inprd{y,y}\\
+    \inprd{x, x} + \inprd{x,y} + \inprd{y,x} + \inprd{y,y}
+    &=\inprd{x,x} + \inprd{y,y}\\
+    \inprd{x,y} + \inprd{y,x} &= 0
+\end{align*}
+But since $x,y \in \R$ we have that $\inprd{x,y} = \inprd{y,x}$, hence
+$$\inprd{x,y} = \inprd{y,x} = 0$$
+Therefore $x \perp y$.
+
+Let now $x,y \in \C$ and suppose that the property holds in this case too.
+Then as before must be that
+\begin{align*}
+    \inprd{x,y} + \inprd{y,x} &= 0
+\end{align*}
+Also, we know that $\inprd{y,x} = \overline{\inprd{x,y}}$ hence
+we need that
+\begin{align*}
+    \inprd{x,y} &= -\overline{\inprd{x,y}}
+\end{align*}
+But since we are assuming a complex inner product we have that $\inprd{x,y}$
+is of the form $a + bi$ hence
+\begin{align*}
+    a + bi = -(a - bi) = -a + bi
+\end{align*}
+Equating the real and imaginary parts we see that $a = 0$ and $b = b$.
+So for example if $x = 1 + i$ and $y = 1 - i$ we see that the Pythagorean
+property holds, as we show below
+\begin{align*}
+    \|1 + i + 1 -i\|^2 = \|2\|^2
+    = 4 = 2 + 2 = \|1 + i\|^2 + \|1 - i\|^2 
+\end{align*}
+But inner product gives us
+$$\inprd{x,y} = (1 + i)\overline{(1 - i)} = (1 + i)(1 + i)
+= 1 + i + i -1 = 2i$$
+Therefore $x$ and $y$ are not orthogonal.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{6}}
+Let $x \neq 0$ and $y \neq 0$
+\begin{itemize}
+\item [(a)] Let $x \perp y$ we want to prove that $\{x,y\}$ is a linearly
+independent set i.e. we want to prove
+\begin{align*}
+    \alpha_1 x + \alpha_2 y = 0
+\end{align*}
+Only for $\alpha_1 = \alpha_2 = 0$.
+Suppose the opposite we want to arrive at a contradiction, let
+$\alpha_1 \neq 0$ and $\alpha_2 = 0$ then $\alpha_1 x + 0 y= 0$ i.e.
+$x = 0$ but we said that $x \neq 0$ so it must be that $\alpha_1 \neq 0$
+and $\alpha_2 \neq 0$. Then we can write that
+\begin{align*}
+    x = -\frac{\alpha_2}{\alpha_1} y
+\end{align*}
+Also, we know that $\inprd{x,y} = 0$ since $x \perp y$ then
+\begin{align*}
+    \inprd{x,y} = \inprd{-\frac{\alpha_2}{\alpha_1} y, y}
+    = -\frac{\alpha_2}{\alpha_1}\inprd{y,y} = 0
+\end{align*}
+But this implies that $y = 0$ and we said that $y \neq 0$, a contradiction.
+
+Therefore must be that $\{x,y\}$ is a linearly independent set.
+
+\item [(b)] Now, let $\{x_1, ..., x_m\}$ be a set of mutually orthogonal
+non-zero vectors, we want to show they are a linearly independent set.
+
+As before, suppose the opposite, we want to arrive at a contradiction.
+
+If $\alpha_i \neq 0$ for only the $i$th vector then $x_i = 0$ and that
+cannot happen.
+
+So let us assume that $\alpha_i \neq 0$ for $1 \leq i \leq m$, if not all
+$\alpha_i$s were different from zero the following still applies, then 
+\begin{align*}
+    \alpha_1 x_1 + ... + \alpha_n x_n &= 0\\
+    x_1 &= -\frac{\alpha_2}{\alpha_1} x_2 - ... - \frac{\alpha_n}{\alpha_1} x_n
+\end{align*}
+Also we know that $\inprd{x_1, x_2} = 0$ then
+\begin{align*}
+    \inprd{x_1, x_2}
+    &= \inprd{-\frac{\alpha_2}{\alpha_1} x_2 - ...
+    - \frac{\alpha_n}{\alpha_1} x_n, x_2}\\
+    &= -\frac{\alpha_2}{\alpha_1} \inprd{x_2, x_2} - ...
+    - \frac{\alpha_n}{\alpha_1}\inprd{x_n, x_2}\\
+    &= -\frac{\alpha_2}{\alpha_1} \inprd{x_2, x_2}\\
+    &= 0
+\end{align*}
+Where we used that $\inprd{x_i, x_2} = 0$ for $1 \leq i \leq m$ and
+$i \neq 2$.
+But the last equality implies that $x_2 = 0$ which is a contradiction.
+
+Therefore must be that the orthogonal nonzero vectors $\{x_1, ..., x_m\}$
+are a linearly independent set.
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{7}}
+Let $\inprd{x,u} = \inprd{x,v}$ for all $x$, then
+must also be true for $x = u$ i.e. $\inprd{u, u} = \inprd{u,v}$
+and for $x = v$ i.e. $\inprd{v, u} = \inprd{v,v}$.\\
+Now, let us compute $\inprd{u- v, u - v}$ as follows
+\begin{align*}
+    \inprd{u- v, u - v}
+    &= \inprd{u, u} - \inprd{u,v} - \inprd{v, u} + \inprd{v, v}\\
+    &= \inprd{u, v} - \inprd{u,v} - \inprd{v, u} + \inprd{v, u}\\
+    &= 0
+\end{align*}
+But then this implies that $u - v = 0$. Therefore $u = v$.
+\end{proof}
+\begin{proof}{\textbf{8}}
+Let us compute (9) knowing that $\|x\| = \sqrt{\inprd{x,x}}$ then 
+\begin{align*}
+    \frac{1}{4}(\|x + y\|^2 - \|x -y\|^2)
+    &= \frac{1}{4}(\inprd{x + y, x + y} - \inprd{x - y, x - y})\\
+    &= \frac{1}{4}(\inprd{x,x} + \inprd{x,y} + \inprd{y,x} + \inprd{y,y} -\\
+    &\quad- (\inprd{x,x} + \inprd{x,-y} + \inprd{-y,x} + \inprd{-y,-y}))\\
+    &= \frac{1}{4}(\inprd{x,x} + \inprd{x,y} + \inprd{y,x} + \inprd{y,y} -\\
+    &\quad- \inprd{x,x} + \inprd{x,y} + \inprd{y,x} - \inprd{y,y})\\
+    &= \frac{1}{4}(2\inprd{x,y} + 2\inprd{x,y})\\
+    &= \inprd{x,y}
+\end{align*}
+Where we used that $\inprd{x,y} = \inprd{y,x}$ since we are in a real inner
+product space.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{9}}
+Let us compute (10) knowing that we are in a complex inner product space, then
+\begin{align*}
+    \frac{1}{4}(\|x + y\|^2 - \|x -y\|^2)
+    &= \frac{1}{4}(\inprd{x + y, x + y} - \inprd{x - y, x - y})\\
+    &= \frac{1}{4}(2\inprd{x,y} + 2\inprd{y,x})\\
+    &= \frac{1}{4}(2\inprd{x,y} + 2\overline{\inprd{x,y}})\\
+    &= \frac{1}{2}(\re{\inprd{x,y}} + i\im{\inprd{x,y}}
+    + \re{\inprd{x,y}} - i\im{\inprd{x,y}})\\
+    &= \re{\inprd{x,y}}
+\end{align*}
+Now, we compute the second equation as follows
+\begin{align*}
+    \frac{1}{4}(\|x + iy\|^2 - \|x -iy\|^2)
+    &= \frac{1}{4}(\inprd{x + iy, x + iy} - \inprd{x - iy, x - iy})\\
+    &= \frac{1}{4}(\inprd{x,x} + \inprd{x,iy} + \inprd{iy,x} + \inprd{iy,iy} -\\
+    &\quad- (\inprd{x,x} + \inprd{x,-iy} + \inprd{-iy,x} + \inprd{-iy,-iy}))\\
+    &= \frac{1}{4}(\inprd{x,x} - i\inprd{x,y} + i\inprd{y,x} + \inprd{y,y} -\\
+    &\quad- \inprd{x,x} - i\inprd{x,y} + i\inprd{y,x} - \inprd{y,y})\\
+    &= \frac{1}{2}(-i\inprd{x,y} + i\inprd{y,x})\\
+    &= \frac{1}{2}(-i\inprd{x,y} + i\overline{\inprd{x,y}})\\
+    &= \frac{1}{2}(-i\re{\inprd{x,y}} + \im{\inprd{x,y}} + i\re{\inprd{x,y}}
+    + \im{\inprd{x,y}})\\
+    &= \im{\inprd{x,y}}
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{10}}
+Let $z_1$ and $z_2$ be complex numbers and let
+$\inprd{z_1, z_2} = z_1\overline{z_2}$ we want to prove that in fact this
+is a valid definition of an inner product.\\
+So if this expression defines an inner product, it must have the four
+properties of inner products.
+Then for (IP1) let $z_3$ be also a complex number
+\begin{align*}
+    \inprd{z_1 + z_3, z_2} = (z_1 + z_3)\overline{z_2} 
+    = z_1\overline{z_2} + z_3\overline{z_2}
+    = \inprd{z_1, z_2} + \inprd{z_3, z_2}
+\end{align*}
+For (IP2) we see that
+\begin{align*}
+    \inprd{\alpha z_1, z_2} = \alpha z_1\overline{z_2}
+    = \alpha\inprd{z_1, z_2}
+\end{align*}
+For (IP3) we see that
+\begin{align*}
+    \inprd{z_1, z_2} = z_1\overline{z_2}
+    = \overline{\overline{z_1}z_2}
+    = \overline{\inprd{z_2, z_1}}
+\end{align*}
+Finally for (IP4) we see that $\inprd{z_1, z_1} = z_1\overline{z_1} \geq 0$.
+Also, let $\inprd{z_1, z_1} = 0$ then
+\begin{align*}
+    z_1\overline{z_1} =
+    (x + iy)(x - iy) =
+    x^2 + y^2 &= 0
+\end{align*}
+Then the only way for this equation to hold is that $x = y = 0$ and hence
+$z_1 = 0$.
+Now, if we suppose $z_1 = 0$ then
+$\inprd{z_1, z_1} = z_1\overline{z_1} = 0$ and hence (IP4) is also
+satisfied.\\
+Therefore $\inprd{z_1, z_1} = z_1\overline{z_1}$ defines in fact an inner
+product.\\
+Also, to have orthogonality it must happen that
+$\inprd{z_1, z_2} = z_1\overline{z_2} = 0$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{11}}
+Let $X$ be the vector space of all ordered pairs of complex numbers.
+The norm defined as $\|x\| = |\xi_1| + |\xi_2|$ cannot be obtained from an
+inner product. We prove this by showing that the norm does not satisfy the
+parallelogram equality. Let us take $x = (-1, 1)$ and $y = (-1, -1)$
+then
+\begin{align*}
+    2(\|x\|^2 + \|y\|^2) = 2((|-1| + |1|)^2 + (|-1| + |-1|)^2) = 16
+\end{align*}
+But 
+\begin{align*}
+    \|x+y\|^2 + \|x-y\|^2 = (|-1 -1| + |1 - 1|)^2 + (|-1 + 1| + |1 + 1|)^2
+    = 8  
+\end{align*}
+Therefore the parallelogram equality is not satisfied and hence the norm
+defined cannot be obtained from an inner product.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{13}}
+The inner product defined in 3.1-5 for continuous functions states that
+\begin{align*}
+    \inprd{x,y} = \int_a^b x(t)\overline{y(t)}~dt
+\end{align*}
+Let us check that this definition satisfies (IP1) to (IP4).
+We assume $x(t)$ and $y(t)$ complex-valued functions.\\
+(IP1):
+\begin{align*}
+    \inprd{x + y,z} &= \int_a^b (x(t) + y(t))\overline{z(t)}~dt\\
+    &= \int_a^b x(t)\overline{z(t)}~dt + \int_a^b y(t)\overline{z(t)}~dt\\
+    &= \inprd{x, z} + \inprd{y, z}
+\end{align*}
+(IP2):
+\begin{align*}
+    \inprd{\alpha x,y} &= \int_a^b \alpha x(t)\overline{y(t)}~dt
+    = \alpha\int_a^b x(t)\overline{y(t)}~dt
+    = \alpha\inprd{x, y}
+\end{align*}
+(IP3):
+\begin{align*}
+    \inprd{x,y} &= \int_a^b x(t)\overline{y(t)}~dt
+    = \int_a^b \overline{\overline{x(t)}y(t)}~dt
+    = \overline{\inprd{y,x}}
+\end{align*}
+(IP4):
+\begin{align*}
+    \inprd{x, x} &= \int_a^b x(t)\overline{x(t)}~dt
+    = \int_a^b |x(t)|^2~dt \geq 0
+\end{align*}
+Let now $\inprd{x, x} = 0$ then 
+\begin{align*}
+    \int_a^b |x(t)|^2~dt = 0
+\end{align*}
+Then must be that $x(t) = 0$ since $x(t)$ is continuous.
+Conversely, if we suppose that $x(t) = 0$ we get that
+\begin{align*}
+    \inprd{x, x} &= \int_a^b 0\cdot 0~dt = 0
+\end{align*}
+Therefore the inner product defined in 3.1-5 satisfy the properties (IP1) to
+(IP4).
+\end{proof}
+
+\cleardoublepage
+\subsection*{3.2 - Further Properties of Inner Produet Spaces}
+\begin{proof}{\textbf{2}}
+An example of subspace of $l^2$ is the set sequences with finitely many entries
+different from zero followed by zeroes i.e.
+\begin{align*}
+    Y = \{(x_1, x_2, ..., x_k, 0, 0, 0, ....): x_i \in \R, 0 \leq i \leq k\}
+\end{align*}
+Suppose $x = (x_1, x_2, ..., x_k, 0, 0, 0, ....) \in Y$ then 
+$$\|x\|_2 = \bigg(\sum_{i=1}^\infty |x_i|^2\bigg)^{1/2}
+= \bigg(\sum_{i=1}^k |x_i|^2\bigg)^{1/2} < \infty$$
+So $Y \subset l^2$.\\
+On the other hand, let $x' = (x_1', x_2', ..., x_k', 0, 0, 0, ....) \in Y$,
+and $\alpha, \beta$ be scalars then 
+\begin{align*}
+    \alpha x + \beta x'
+    &= \alpha (x_1, x_2, ..., x_k, 0, 0, 0, ....)
+    + \beta (x_1', x_2', ..., x_k', 0, 0, 0, ....)\\
+    &=(\alpha x_1, \alpha x_2, ..., \alpha x_k, 0, 0, 0, ....)
+    + (\beta x_1', \beta x_2', ..., \beta x_k', 0, 0, 0, ....)\\
+    &=(\alpha x_1 + \beta x_1', \alpha x_2 + \beta x_2', ...,
+    \alpha x_k + \beta x_k', 0, 0, 0, ....)
+\end{align*}
+We see that $\alpha x_i + \beta x_i' \in \R$ since $\R$ is a vector space then
+$Y$ is a subspace of $l^2$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{3}}
+Let $X$ be the inner product space consisting of the polynomial $x = 0$ and all
+real polynomials in $t$ of degree not exceeding 2, considered for real
+$t \in [a,b]$ with inner product defined as 
+\begin{align*}
+    \inprd{x,y} = \int_a^b x(t)y(t)~dt
+\end{align*}
+Let $(x_n) = (\alpha_n t^2 + \beta_n t + \gamma_n) \in X$ be a Cauchy sequence
+on $X$ where $\alpha_n, \beta_n, \gamma_n \in \R$ then since this is a Cauchy
+sequence, given $\epsilon > 0$ we can find $N \in \N$ such that when $n,m > N$
+we have that
+\begin{align*}
+    \|x_n - x_m\| = \bigg(\int_a^b (x_n(t) - x_m(t))^2~dt\bigg)^{1/2}
+    < \epsilon
+\end{align*}
+Hence
+\begin{align*}
+    \bigg(\int_a^b ((\alpha_n - \alpha_m)t^2 + (\beta_n - \beta_m)t + (\gamma_n - \gamma_m))^2~dt\bigg)^{1/2}
+    < \epsilon
+\end{align*}
+For this integral to tend to 0 over the fixed interval $[a,b]$  since $t$ does
+not depend on $n$ must happen that
+$(\alpha_n - \alpha_m) \to 0$, $(\beta_n - \beta_m) \to 0$ and
+$(\gamma_n - \gamma_m) \to 0$.
+\\
+This implies that $(\alpha_n)$, $(\beta_n)$ and $(\gamma_n)$ are Cauchy
+sequences of real numbers which we know they converge,
+let us say that they converge to $\alpha, \beta$ and $\gamma$ respectively.
+\\
+Now, let us define $x = \alpha t^2 + \beta t + \gamma$ then
+\begin{align*}
+    \|x_n - x\| &= \bigg(\int_a^b (x_n(t) - x(t))^2~dt\bigg)^{1/2}\\
+    &= \bigg(\int_a^b ((\alpha_n - \alpha)t^2 + (\beta_n - \beta)t + (\gamma_n - \gamma))^2~dt\bigg)^{1/2}
+\end{align*}
+But we know that $\alpha_n \to \alpha$, $\beta_n \to \beta$ and
+$\gamma_n \to \gamma$ therefore we have that
+\begin{align*}
+    \bigg(\int_a^b ((\alpha_n - \alpha)t^2 + (\beta_n - \beta)t + (\gamma_n - \gamma))^2~dt\bigg)^{1/2}
+    \to 0 
+\end{align*}
+Or what is the same $x_n \to x$ and hence since $x_n$ was a Cauchy sequence
+then $X$ is complete.
+\\\\
+Let now $Y$ be all $x \in X$ such that $x(a) = 0$. Let $y, y' \in Y$ and let
+$\alpha, \beta$ be scalars. We know that when $t = a$ then $y(a) = y'(a) = 0$ then
+for $z(t) = \alpha y(t) + \beta y'(t)$ we have that
+$z(a) = \alpha y(a) + \beta y'(a) = 0 + 0 = 0$.
+Therefore $Y$ is a subspace of $X$.
+
+\cleardoublepage
+Finally, let $Z$ be all $x\in X$ of degree 2. Let $z, z' \in Z$ and let
+$\lambda, \rho$ be scalars. Then let us compute $\lambda z + \rho z'$ as
+follows
+\begin{align*}
+    \lambda(\alpha t^2 + \beta t + \gamma) + \rho(\alpha' t^2 + \beta' t + \gamma')
+    = (\lambda\alpha + \rho\alpha')t^2 + (\lambda\beta + \rho\beta')t + (\lambda\gamma + \rho\gamma')
+\end{align*}
+Where $\alpha, \alpha', \beta, \beta', \gamma$ and $\gamma'$ are not zero.
+Then we see that if $\lambda = \rho = 0$ we get that $\lambda z + \rho z' = 0$
+but the polynomial $z = 0$ is not included in $Z$ then $Z$ is not a subspace
+of $X$.
+\end{proof}
+\begin{proof}{\textbf{4}}
+Let $y \perp x_n$ and $x_n \to x$ then by the Continuity of the Inner Product
+we have that
+\begin{align*}
+    \inprd{x_n, y} \to \inprd{x, y}
+\end{align*}
+This implies that
+\begin{align*}
+    \|\inprd{x_n, y} - \inprd{x, y}\| \to 0
+\end{align*}
+But we know that $\inprd{x_n, y} = 0$ because $y \perp x_n$ hence
+\begin{align*}
+    \|\inprd{x, y}\| \to 0
+\end{align*}
+And by the (N2) property for norms, we get that
+\begin{align*}
+    \inprd{x, y} = 0
+\end{align*}
+Therefore $x \perp y$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{5}}
+Let a sequence $(x_n)$ in an inner product space such that
+$\|x_n\| \to \|x\|$ and $\inprd{x_n, x} \to \inprd{x, x}$.
+Given that $\|x_n\| \to \|x\|$ then $\|x_n\|^2 \to \|x\|^2$ so given
+$\epsilon^2/3 > 0$ there is $N \in \N$ such that when $n \geq N$ we see that
+\begin{align*}
+    |\|x_n\|^2 - \|x\|^2| = |\inprd{x_n, x_n} - \inprd{x,x}| < \epsilon^2/3
+\end{align*}
+On the other hand, since $\inprd{x_n, x} \to \inprd{x, x}$ given $\epsilon^2/3 > 0$
+there is $N' \in \N$ such that when $n \geq N'$ we get that
+\begin{align*}
+    |\inprd{x_n, x} - \inprd{x,x}| &= |\inprd{x_n - x, x}| < \epsilon^2/3
+\end{align*}
+Also, let us note that
+\begin{align*}
+    \|x_n - x\|^2 &= |\inprd{x_n - x, x_n - x}|\\
+    &= |\inprd{x_n - x, x_n} - \inprd{x_n - x, x}|\\
+    &\leq |\inprd{x_n - x, x_n}| + |\inprd{x_n - x, x}|\\
+    &\leq |\inprd{x_n, x_n} - \inprd{x, x_n}| + |\inprd{x_n - x, x}|\\
+    &\leq |\inprd{x_n, x_n} - \inprd{x,x} + \inprd{x,x} - \inprd{x, x_n}| + |\inprd{x_n - x, x}|\\
+    &\leq |\inprd{x_n, x_n} - \inprd{x,x}| + |\inprd{x, x - x_n}| + |\inprd{x_n - x, x}|
+\end{align*}
+Then if we take $M = \max(N, N')$ when $n \geq M$ we have that
+\begin{align*}
+    \|x_n - x\|^2 
+    &\leq |\inprd{x_n, x_n} - \inprd{x,x}| + |\inprd{x, x - x_n}| + |\inprd{x_n - x, x}|\\
+    & < \epsilon^2/3 + \epsilon^2/3 + \epsilon^2/3 = \epsilon^2 
+\end{align*}
+Therefore $\|x_n - x\| < \epsilon$ and hence $x_n \to x$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{9}}
+Let $V$ be the vector space of all continuous complex-valued functions on
+$J = [a,b]$. Let $X_1 = (V, \|\cdot\|_\infty)$ where
+$\|x\|_{\infty} = \max_{t \in J} |x(t)|$ and let $X_2 = (V, \|\cdot\|_2)$ where
+$$\|x\|_2 = \sqrt{\inprd{x,x}} \qquad \inprd{x,y} = \int_{a}^b x(t)\overline{y(t)}~dt$$
+Also, let us define $i: X_1 \to X_2$ be the identity mapping $x \to x$.\\
+Suppose we take $x,y \in V$ then we see that
+\begin{align*}
+    \|x - y\|_2 &= \sqrt{\inprd{x - y,x - y}}\\
+    &= \sqrt{\int_{a}^b (x(t) - y(t))(\overline{x(t) - y(t)})~dt}\\
+    &= \sqrt{\int_{a}^b |x(t) - y(t)|^2~dt}
+\end{align*}
+But also we have that
+\begin{align*}
+    \sqrt{\int_{a}^b |x(t) - y(t)|^2~dt}
+    &\leq \sqrt{\int_{a}^b \max_{t \in J}|x(t) - y(t)|^2~dt}
+    &= \max_{t \in J}|x(t) - y(t)| \sqrt{b -a}
+\end{align*}
+So given $\epsilon > 0$ if we take $\delta = \epsilon/\sqrt{b - a}$ such that
+\begin{align*}
+    \|x - y\|_{\infty} = \max_{t \in J} |x(t) - y(t)| < \delta
+    = \frac{\epsilon}{\sqrt{b - a}}
+\end{align*}
+We get that
+\begin{align*}
+    \|x - y\|_2 \leq \max_{t \in J}|x(t) - y(t)| \sqrt{b -a} < \epsilon
+\end{align*}
+Therefore the identity mapping $i$ is continuous.
+
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{10}}
+Let $T: X \to X$ be a bounded linear operator on a complex inner product space
+$X$ and let $\inprd{Tx, x} = 0$ for all $x \in X$.
+\\
+Let $x = \alpha u + v \in X$ for some $u,v \in X$ and $\alpha \in \C$ then
+\begin{align*}
+    \inprd{Tx ,x} &= \inprd{\alpha Tu + Tv,\alpha u + v}\\
+    &= \inprd{\alpha Tu, \alpha u + v} + \inprd{Tv,\alpha u + v}\\
+    &= \alpha\overline{\alpha}\inprd{Tu, u} + \alpha\inprd{Tu, v}
+    + \overline{\alpha}\inprd{Tv,u} + \inprd{Tv, v}\\
+    &= \alpha\inprd{Tu, v} + \overline{\alpha}\inprd{Tv,u}
+\end{align*}
+Then taking $\alpha = 1$ we get that
+\begin{align*}
+    \inprd{Tu, v} + \inprd{Tv,u} &= 0\\
+    \inprd{Tu, v} &= -\inprd{Tv,u} 
+\end{align*}
+But if we take $\alpha = i$ we have that $i\inprd{Tu, v} - i\inprd{Tv,u} = 0$
+or
+\begin{align*}
+    \inprd{Tu, v} - \inprd{Tv,u} &= 0\\
+    \inprd{Tu, v} &= \inprd{Tv,u}
+\end{align*}
+This implies that $\inprd{Tu, v} = 0$ for all $u,v \in X$ so in particular if
+we select $v = Tu$ then $\inprd{Tu, Tu} = 0$ and hence by (IP4) we have that
+$Tu = 0$. Therefore $T = 0$.
+\\\\
+Let us consider now the Euclidean plane, a real inner product space, and let
+$T: \R^2 \to \R^2$ be defined by
+\begin{align*}
+    T\begin{bmatrix} x \\y \end{bmatrix}
+    = \begin{bmatrix}
+        \cos\pi/2 & -\sin\pi/2\\
+        \sin\pi/2 & \cos\pi/2
+    \end{bmatrix}\begin{bmatrix} x \\y \end{bmatrix}
+    = \begin{bmatrix}
+        0 & -1\\ 1 & 0
+    \end{bmatrix}\begin{bmatrix} x \\y \end{bmatrix}
+    = \begin{bmatrix} -y \\ x \end{bmatrix}
+\end{align*}
+Then let us compute the following inner product
+\begin{align*}
+    \inprd{T\begin{bmatrix} x \\y \end{bmatrix},
+    \begin{bmatrix} x \\y \end{bmatrix}}
+    &= \inprd{\begin{bmatrix} -y \\x \end{bmatrix},
+    \begin{bmatrix} x \\y \end{bmatrix}}
+    = -yx + xy = 0
+\end{align*}
+Therefore, we see that the inner product is 0 but $T \neq 0$ so above result
+does not hold for real inner product spaces.
+\end{proof}
+
+\cleardoublepage
+\subsection*{3.3 - Orthogonal Complements and Direct Sums}
+\begin{proof}{\textbf{1}}
+Let $H$ be a Hilbert space, $M \subset H$ a convex subset, and $(x_n)$ a
+sequence in $M$ such that $\|x_n\| \to d$ where $d = \inf_{x \in M}\|x\|$.
+\\
+Let us consider $\overline{M}$ the closure of $M$ then $\overline{M}$ is
+complete because $\overline{M}\subset H$, also, $(x_n) \in \overline{M}$.
+\\
+Let $n,m \in \N$ where $n \geq m$.
+We see that $\frac{1}{2}x_n + \frac{1}{2}x_m \in M$ because $M$ is convex but
+also we have that
+\begin{align*}
+    \bigg\|\frac{x_n + x_m}{2}\bigg\| \geq d = \inf_{x \in M} \|x\|
+\end{align*}
+Hence
+\begin{align*}
+    \|x_n + x_m\| \geq 2d
+\end{align*}
+On the other hand, by the parallelogram equality we get that
+\begin{align*}
+    \|x_n - x_m\|^2 &= - \|x_n + x_m\|^2 + 2(\|x_n\|^2 + \|x_m\|^2)\\
+    &\leq -(2d)^2 + 2(\|x_n\|^2 + \|x_m\|^2)
+\end{align*}
+But since $\|x_n\| \to d$ as $n, m \to \infty$ then $\|x_n - x_m\| \to 0$.
+Therefore $(x_n)$ is Cauchy, but this also implies that $(x_n)$ converges
+because $\overline{M}$ is a subset of a Hilbert space.
+\end{proof}
+\end{document}
