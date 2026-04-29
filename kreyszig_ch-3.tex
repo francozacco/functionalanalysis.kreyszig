@@ -30,9 +30,10 @@
 \newcommand{\dom}{\mathscrsfs{D}}
 \newcommand{\range}{\mathscrsfs{R}}
 \newcommand{\nullsp}{\mathscrsfs{N}}
-\newcommand{\inprd}[1]{\langle{#1}\rangle}
+\newcommand{\inprd}[1]{\left\langle{#1}\right\rangle}
 \newcommand{\re}[1]{\text{Re}{#1}}
 \newcommand{\im}[1]{\text{Im}{#1}}
+\newcommand{\Span}[1]{\text{span}(#1)}
 
 
 \theoremstyle{definition}
@@ -598,5 +599,1085 @@ On the other hand, by the parallelogram equality we get that
 But since $\|x_n\| \to d$ as $n, m \to \infty$ then $\|x_n - x_m\| \to 0$.
 Therefore $(x_n)$ is Cauchy, but this also implies that $(x_n)$ converges
 because $\overline{M}$ is a subset of a Hilbert space.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{5}}
+Let $X = \R^2$ then
+\begin{itemize}
+\item[(a)] Let $M = \{x\}$ where $x = (\xi_1, \xi_2) \neq 0$ then $M^\perp$ by
+definition is 
+\begin{align*}
+    M^\perp = \{x'\in X~|~x'\perp M\} = \{x'\in X~|~\inprd{x',x} = 0\}
+\end{align*}
+Let $x' = (-\xi_2, \xi_1) \in X$ then we see that
+\begin{align*}
+    \inprd{x',x} = -\xi_1 \xi_2 + \xi_2 \xi_1 = 0
+\end{align*}
+So $(-\xi_2, \xi_1) \in M^\perp$ but $(-\alpha\xi_2, \alpha\xi_1)$ for
+$\alpha \in \R$ is also in $M^\perp$.
+\\
+Therefore $M^\perp = \{(-\alpha\xi_2,\alpha\xi_1) \in X ~|~ \alpha \in \R\}$.
+\item[(b)] Let $M = \{x_1, x_2\}$ where $x_1$ and $x_2$ are linearly
+independent then
+\begin{align*}
+    M^\perp &= \{x'\in X~|~x'\perp M\}\\
+    &= \{x'\in X~|~\inprd{x',x_1} = 0 \text{ and } \inprd{x',x_2} = 0\}
+\end{align*}
+Suppose $x' \in X$ satisfy $\inprd{x',x_1} = 0$ and $\inprd{x',x_2} = 0$,
+then we have that
+\begin{align*}
+    \inprd{x',x_1} = \eta_1\xi_{11} + \eta_2\xi_{12} = 0
+\end{align*}
+and 
+\begin{align*}
+    \inprd{x',x_2} = \eta_1\xi_{21} + \eta_2\xi_{22} = 0
+\end{align*}
+Where we assumed that $x_1 = (\xi_{11}, \xi_{12})$, $x_2 = (\xi_{21}, \xi_{22})$
+and $x' = (\eta_{1}, \eta_{2})$.
+But since $x_1$ and $x_2$ are linearly independent then the equations
+\begin{align*}
+    c_{1}\xi_{11} + c_2\xi_{21} = 0\\
+    c_{1}\xi_{12} + c_2\xi_{22} = 0
+\end{align*}
+have only one solution, $c_1 = c_2 = 0$.
+\\
+Therefore must be that $x' = 0$ and hence
+\begin{align*}
+    M^\perp &= \{0\}
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{6}}\\
+Let $Y = \{x ~|~ x=(\xi_j) \in l^2, \xi_{2n} = 0, n \in \N\}$ we want to show
+that $Y$ is a closed subspace of $l^2$.
+\\
+Let $(x_j) \subset Y$ and suppose it converges to some
+$x = (\eta_j) \not\in Y$ we want to arrive at a contradiction, then
+given $\epsilon > 0$ there is some $N\in \N$ such that when $n \geq N$
+we have that $\|x_n - x\| < \epsilon$, also, we see that
+\begin{align*}
+    \|x_n - x\| &= \sqrt{\sum_{j=1}^\infty |\xi_j - \eta_j|^2}
+    = \sqrt{\sum_{j=1}^\infty |\xi_{2j + 1} - \eta_{2j + 1}|^2
+    + \sum_{j=1}^\infty |\eta_{2j}|^2}
+\end{align*}
+Since the first term on the RHS is non-negative then
+\begin{align*}
+    \|x_n - x\| \geq \sqrt{\sum_{j=1}^\infty |\eta_{2j}|^2}
+\end{align*}
+So we have a lower bound on $\|x_n - x\|$ but $\|x_n - x\| \to 0$, a
+contradiction.
+\\
+Therefore, must be that $\eta_{2j} = 0$ so $x \in Y$ and hence $Y$ is closed.
+\\\\
+Given $x \in Y$, to find $Y^\perp$ we need to find all elements $z \in l^2$
+such that $\inprd{x,z} = 0$. We see that
+\begin{align*}
+    \inprd{x,z} = \sum_{j=1}^\infty \xi_j\bar\eta_j
+    = \sum_{j=1}^\infty \xi_{2j + 1}\bar\eta_{2j + 1}
+    + \sum_{j=1}^\infty \xi_{2j}\bar\eta_{2j}
+    = \sum_{j=1}^\infty \xi_{2j + 1}\bar\eta_{2j + 1}
+\end{align*}
+So for $\inprd{x,z} = 0$ then must be that $\bar\eta_{2j + 1} = 0$ because it
+must hold for every $x \in Y$. Therefore
+\begin{align*}
+    Y^\perp = \{x ~|~ x=(\eta_j) \in l^2, \eta_{2n + 1} = 0, n \in \N\}
+\end{align*}
+\\
+Finally, let $Y = \text{span}\{e_1, ..., e_n\} \subset l^2$ where
+$e_j = (\delta_{jk})$.
+\\
+We see that an element $x \in Y$ can be written as
+\begin{align*}
+    x = \alpha_1 e_1 + ... + \alpha_n e_n
+    = \bigg(\alpha_1, \alpha_2, ..., \alpha_n, 0, 0, ...\bigg)
+\end{align*}
+Where $\alpha_1, ..., \alpha_n \in \C$.
+\\
+Let then $z \in l^2$, we see that
+\begin{align*}
+    \inprd{x,z}
+    = \alpha_1 \bar\eta_1 + \alpha_2 \bar\eta_2 + ... + \alpha_n \bar\eta_n 
+    + 0\cdot \bar\eta_{n+1} + 0\cdot \bar\eta_{n+2} + ...
+\end{align*}
+So for $\inprd{x,z} = 0$ must be that $\eta_j = 0$ for $1\leq j \leq n$ and
+hence
+\begin{align*}
+    Y^\perp = \{x ~|~x = (\xi_j)\in l^2
+    \text{ such that }\xi_j = 0\text{ for } 1 \leq j \leq n\}
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{7}}\\
+Let $A$ and $A \subset  B$ be nonempty subsets of an inner product space $X$
+\begin{itemize}
+\item [(a)] Let $a \in A$ and $a' \in A^\perp$ we see that $\inprd{a,a'} = 0$
+hence $a \perp A^\perp$, also by definition we know that
+\begin{align*}
+    A^{\perp\perp} = \{x \in X ~|~ x \perp A^{\perp}\}
+\end{align*}
+Then $a \in A^{\perp\perp}$ and since $a$ was arbitrary we have that
+\begin{align*}
+    A \subset A^{\perp\perp}
+\end{align*}
+\item [(b)] Let $b \in B$, $a \in A$ and $b' \in B^\perp$, by definition
+$b' \perp B$ hence $\inprd{b, b'} = 0$ but since $a$ is also in $B$ then
+must be that $\inprd{a, b'} = 0$ and since $a$ and $b$ were arbitrary then
+this implies that $b' \perp A$ and therefore
+\begin{align*}
+    B^{\perp} \subset A^\perp
+\end{align*}
+\item [(c)] From part (a) we have that $A \subset A^{\perp\perp}$ and from part
+(b) taking $B = A^{\perp\perp}$ we have that
+\begin{align*}
+    B^{\perp} = A^{\perp\perp\perp} \subset A^\perp
+\end{align*}
+Also, from part (a) if we take $A$ as $A^\perp$ following the same steps we get
+that
+\begin{align*}
+    A^\perp \subset A^{\perp\perp\perp}
+\end{align*}
+Therefore joining both results we get that $A^{\perp\perp\perp} = A^\perp$.
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{9}}\\
+Let $Y$ be a subspace of a Hilbert space $H$
+\begin{itemize}
+\item [$(\Rightarrow)$] Suppose $Y$ is closed in $H$ then by Lemma 3.3-6 we get
+that $Y = Y^{\perp\perp}$.
+\item [$(\Leftarrow)$] Suppose $Y = Y^{\perp\perp}$. We prove first that
+$Y^\perp$ is closed in $H$.
+\\
+Let $(x_n) \in Y^\perp$ be a convergent sequence, that converges to $x \in H$.
+\\
+Let also, $y \in Y$ then we know that $\inprd{x_n, y} = 0$, then by continuity
+of the inner product we have that
+\begin{align*}
+    \inprd{x_n,y} \to \inprd{x,y}
+\end{align*}
+but $\inprd{x_n,y} = 0$ then $\inprd{x,y} = 0$ and hence $x \in Y^\perp$.
+So $Y^\perp$ is closed.
+\\
+We see that $Y^\perp$ is a subspace of $H$ since if $y_1', y_2' \in Y^\perp$
+and $x \in Y$ then
+\begin{align*}
+    \inprd{\alpha y_1' + \beta y_2', x} =
+    \alpha\inprd{y_1', x} + \beta\inprd{y_2', x} = 0
+\end{align*}
+So following the same logic we used to prove $Y^\perp$ is closed
+assuming $Y$ is a subspace of $H$ we get that $Y^{\perp\perp}$ is closed 
+but $Y = Y^{\perp\perp}$.
+\\
+Therefore $Y$ is closed.
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{10}}\\
+Let $M \neq \emptyset$ be any subset of a Hilbert space $H$.
+\\
+Let us notice that $M^{\perp\perp}$ is a closed subspace of $H$ so
+$M^{\perp\perp}$ is a Hilbert space and hence without loss of generality we 
+may assume that $M$ is a subset of $H= M^{\perp\perp}$.
+\\
+Let us take $x, y \in H = M^{\perp\perp}$ then $\inprd{x,y} \neq 0$ because
+otherwise either $x$ or $y$ are not in $M^{\perp\perp}$ so the only way where
+$\inprd{x,y} = 0$ is that $x = y = 0$ and hence $M^\perp = \{0\}$.
+\\
+Then by theorem 3.3-7 we have that the span of $M$ is dense in $M^{\perp\perp}$
+but then
+$$M \subset \overline{\text{span}(M)} = M^{\perp\perp}$$
+Therefore $M^{\perp\perp}$ is the smallest closed subspace containing $M$.
+\end{proof}
+
+\cleardoublepage
+\subsection*{3.4 - Orthonormal Sets and Sequences}
+\begin{proof}{\textbf{1.}}
+Let $X$ be an inner product space of finite dimension $n$, then, $X$ contains 
+a lineraly independent set of $n$ vectors (a basis), let us call them
+$B' = \{b'_1, ..., b'_n\}$.
+\\
+We want to define $B = \{b_1, ..., b_n\}$ such that the elements are
+orthonormal. Let us define $b_1 \in X$ such that
+\begin{align*}
+    b_1 = \frac{1}{\|b'_1\|}\cdot b'_1
+\end{align*}
+We see that we can write $b'_2$ as
+\begin{align*}
+    b'_2 = \inprd{b'_2, b_1}b_1 + v_2
+\end{align*}
+where $v_2$ is non-zero since the elements of $B'$ are linearly independent,
+then
+\begin{align*}
+    v_2 = b'_2 - \inprd{b'_2, b_1}b_1
+\end{align*}
+We see that
+\begin{align*}
+    \inprd{b_1, v_2} &= \inprd{b_1, b'_2 - \inprd{b'_2, b_1}b_1}\\
+    &= \inprd{b_1, b'_2} - \inprd{b_1, \inprd{b'_2, b_1}b_1}\\
+    &= \inprd{b_1, b'_2} - \overline{\inprd{b'_2, b_1}}\inprd{b_1, b_1}\\
+    &= \inprd{b_1, b'_2} - \inprd{b_1, b'_2}\frac{1}{\|b'_1\|^2}\inprd{b'_1, b'_1}\\
+    &= \inprd{b_1, b'_2} - \inprd{b_1, b'_2}\frac{\|b'_1\|^2}{\|b'_1\|^2}\\
+    &= \inprd{b_1, b'_2} - \inprd{b_1, b'_2}\\
+    &= 0
+\end{align*}
+Hence, we see that they are orthogonal. Then we define $b_2$ as
+\begin{align*}
+    b_2 = \frac{1}{\|v_2\|}\cdot v_2
+\end{align*}
+Now, to define $b_3$ we note that there is $v_3$ such that
+\begin{align*}
+    v_3 = b'_3 -\inprd{b'_3, b_1}b_1 - \inprd{b'_3, b_2}b_2
+\end{align*}
+We see that $v_3$ is non-zero since the elements of $B'$ are linearly
+independent. Also, $v_3 \perp b_1$ and $v_3 \perp b_2$, then we define $b_3$ 
+as
+\begin{align*}
+    b_3 = \frac{1}{\|v_3\|}\cdot v_3
+\end{align*}
+We can carry on this process $n$ times until we find
+\begin{align*}
+    v_n = b'_n - \sum_{i =1}^{n-1} \inprd{b'_n, b_i}b_i
+\end{align*}
+From which we define $b_n$ as
+\begin{align*}
+    b_n = \frac{1}{\|v_n\|}\cdot v_n
+\end{align*}
+Therefore we have found a set $B$ that is orthogonal pairwise, where each
+element has norm equal to 1, so $B$ is an orthonormal set.
+\\
+Finally, because of Lemma 3.4-2 we know that $B$ is linearly independent so $B$
+is a basis for $X$ as well.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{2.}}
+Equation $(12^*)$ states that
+\begin{align*}
+    \sum_{k=1}^n |\inprd{x, e_k}|^2 \leq \|x\|^2
+\end{align*}
+Where $x \in \R^r$ and $r \geq n$.
+We know from equation (9) that
+\begin{align*}
+    \|y\|^2 = \sum_{k=1}^n |\inprd{x, e_k}|^2
+\end{align*}
+So $y$ is the projection of $x$ onto a set of orthonormal vectors in $\R^n$
+hence $(12^*)$ is telling us geometrically that the length of a projection
+vector $y$ is less than or equal to the length of $x$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{3.}}
+Let $x, y \in X$ where $X$ is an inner product space.
+Let us take an orthonormal set $\{e_1, ..., e_n\}$ such that
+\begin{align*}
+    e_1 = \frac{y}{\|y\|}
+\end{align*}
+Then we see that
+\begin{align*}
+    \sum_{k=1}^n |\inprd{x, e_k}|^2
+    &= |\inprd{x, e_1}|^2 + \sum_{k=2}^n |\inprd{x, e_k}|^2\\
+    &= \bigg|\bigg\langle x, \frac{y}{\|y\|}\bigg\rangle\bigg|^2
+    + \sum_{k=2}^n |\inprd{x, e_k}|^2\\
+    &= \frac{|\inprd{x, y}|^2}{\|y\|^2}
+    + \sum_{k=2}^n |\inprd{x, e_k}|^2
+\end{align*}
+We note that
+\begin{align*}
+    \frac{|\inprd{x, y}|^2}{\|y\|^2} \leq \frac{|\inprd{x, y}|^2}{\|y\|^2}
+    + \sum_{k=2}^n |\inprd{x, e_k}|^2
+\end{align*}
+Now, applying $(12^*)$ to $x$ we get that
+\begin{align*}
+    \frac{|\inprd{x, y}|^2}{\|y\|^2}
+    \leq \frac{|\inprd{x, y}|^2}{\|y\|^2}
+    + \sum_{k=2}^n |\inprd{x, e_k}|^2 
+     = \sum_{k=1}^n |\inprd{x, e_k}|^2 \leq \|x\|^2
+\end{align*}
+Hence
+\begin{align*}
+    |\inprd{x, y}|^2 \leq \|x\|^2\|y\|^2
+\end{align*}
+And taking the square root we get Schwarz inequality
+\begin{align*}
+    |\inprd{x, y}| \leq \|x\|\|y\|
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{4.}}
+Let us consider the orthonormal sequence
+\begin{align*}
+    e_1 &= (0, 1, 0, 0, ...)\\
+    e_2 &= (0, 0, 1, 0, ...)\\
+    e_3 &= (0, 0, 0, 1, ...)\\
+    &\vdots
+\end{align*}
+And let us consider the sequence
+\begin{align*}
+    x = (1, 0, 0, 0, ...) \in l^2
+\end{align*}
+Then we see that
+\begin{align*}
+    \sum_{k=1}^\infty |\inprd{x, e_k}|^2 = 0
+\end{align*}
+But
+\begin{align*}
+    \|x\|^2 = 1^2 + 0 + 0 + ... = 1
+\end{align*}
+Therefore the strict inequality holds in this case
+\begin{align*}
+    \sum_{k=1}^\infty |\inprd{x, e_k}|^2 = 0 < \|x\|^2 = 1
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{5.}}
+Let $(e_k)$ be an orthonormal sequence in an inner product space $X$, let also
+$x \in X$ and
+\begin{align*}
+    y = \sum_{k=1}^n \alpha_k e_k \qquad \alpha_k = \inprd{x, e_k}
+\end{align*}
+We want to show that $x - y$ is orthogonal to the subspace
+$Y_n = \text{span}\{e_1,..., e_n\}$.
+Let us consider some $y' \in Y_n$ defined as
+\begin{align*}
+    y' = \sum_{k=1}^n \inprd{y', e_k} e_k 
+\end{align*}
+Then
+\begin{align*}
+    \inprd{x -y, y'} &= \inprd{x, y'}  - \inprd{y, y'}\\
+    &= \inprd{x, \sum_{k=1}^n \inprd{y', e_k} e_k}
+    - \inprd{\sum_{k=1}^n \inprd{x, e_k} e_k, \sum_{j=1}^n \inprd{y', e_j} e_j}\\
+    &= \sum_{k=1}^n \overline{\inprd{y', e_k}}\inprd{x, e_k}
+    - \sum_{k=1}^n\inprd{x, e_k}\inprd{e_k, \sum_{j=1}^n \inprd{y', e_j} e_j}\\
+    &= \sum_{k=1}^n \overline{\inprd{y', e_k}}\inprd{x, e_k}
+    - \sum_{k=1}^n\inprd{x, e_k}\sum_{j=1}^n \overline{\inprd{y', e_j}}\inprd{e_k, e_j}
+\end{align*}
+Since $\inprd{e_k, e_j} = 1$ only if $k = j$ otherwise it's 0 then we can write
+that
+\begin{align*}
+    \inprd{x -y, y'}
+    &= \sum_{k=1}^n \overline{\inprd{y', e_k}}\inprd{x, e_k}
+    - \sum_{k=1}^n\inprd{x, e_k} \overline{\inprd{y', e_k}}
+    = 0
+\end{align*}
+Therefore since $y'$ was arbitrary we see that $x -y$ is orthogonal to $Y_n$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{6.}}
+Let $\{e_1, ..., e_n\}$ be an orthonormal set in an inner product space $X$,
+where $n$ is fixed. Let $x \in X$ and let $y = \beta_1 e_1 +... + \beta_ne_n$.
+We want to show that $\|x -y\|$ is minimum if and only if
+$\beta_j = \inprd{x,e_j}$ where $j = 1,..., n$.
+\begin{itemize}
+\item [$(\Rightarrow)$] Suppose $\|x - y\|$ is minimum then we note that
+\begin{align*}
+    x -y = x - \sum_{j=1}^n \beta_j e_j
+    &= \bigg(x - \sum_{i=1}^n \inprd{x, e_i} e_i \bigg)
+    + \bigg(\sum_{k=1}^n \inprd{x, e_k} e_k - \sum_{j=1}^n \beta_j e_j\bigg)
+\end{align*}
+Then we see that
+\begin{align*}
+    &\inprd{x - \sum_{i=1}^n \inprd{x, e_i} e_i
+    , \sum_{k=1}^n \inprd{x, e_k}e_k - \sum_{j=1}^n\beta_j e_j}\\
+    &= \inprd{x, \sum_{k=1}^n \inprd{x, e_k}e_k}
+    - \inprd{x, \sum_{j=1}^n\beta_j e_j}
+    - \inprd{\sum_{i=1}^n \inprd{x, e_i} e_i, \sum_{k=1}^n \inprd{x, e_k}e_k}\\
+    &\quad+ \inprd{\sum_{i=1}^n \inprd{x, e_i} e_i,\sum_{j=1}^n\beta_j e_j}\\
+    &= \sum_{k=1}^n \overline{\inprd{x, e_k}}\inprd{x, e_k}
+    - \sum_{j=1}^n\overline{\beta_j}\inprd{x, e_j}
+    - \sum_{i=1}^n\inprd{x, e_i}\sum_{k=1}^n\overline{\inprd{x, e_k}}\inprd{e_i, e_k}\\
+    &\quad+ \sum_{i=1}^n\inprd{x, e_i}\sum_{j=1}^n\overline{\beta_j}\inprd{ e_i, e_j}\\
+    &= \sum_{k=1}^n \overline{\inprd{x, e_k}}\inprd{x, e_k}
+    - \sum_{j=1}^n\overline{\beta_j}\inprd{x, e_j}
+    - \sum_{i=1}^n\inprd{x, e_i}\overline{\inprd{x, e_i}}
+    + \sum_{i=1}^n\inprd{x, e_i}\overline{\beta_i}\\
+    &= 0
+\end{align*}
+So the vectors are orthogonal, then by the Pythagorean realation we have that
+\begin{align*}
+    \|x - \sum_{j=1}^n \beta_j e_j\|^2
+    &= \|x - \sum_{i=1}^n \inprd{x, e_i} e_i\|^2
+    + \|\sum_{k=1}^n \inprd{x, e_k} e_k - \sum_{j=1}^n \beta_j e_j\|^2
+\end{align*}
+We see the last term is
+\begin{align*}
+    \|\sum_{k=1}^n (\inprd{x, e_k} - \beta_k)e_k\|^2
+    &= \inprd{\sum_{k=1}^n (\inprd{x, e_k} - \beta_k)e_k,
+    \sum_{j=1}^n (\inprd{x, e_j} - \beta_j)e_j}\\
+    &=\sum_{k=1}^n(\inprd{x, e_k} - \beta_k)
+    \sum_{j=1}^n (\inprd{x, e_j} - \beta_j)\inprd{e_k, e_j}\\
+    &=\sum_{k=1}^n|\inprd{x, e_k} - \beta_k|^2
+\end{align*}
+Therefore since the first term, $\|x - \sum_{i=1}^n \inprd{x, e_i} e_i\|^2$,
+is constant, and we said that $\|x -y\|^2$ is mininum then must be that
+\begin{align*}
+    \sum_{k=1}^n|\inprd{x, e_k} - \beta_k|^2 = 0
+\end{align*}
+And that can only happen if $\beta_k = \inprd{x, e_k}$ for all
+$k \in \{1,...,n\}$.
+\item [$(\Leftarrow)$] Suppose now that $\beta_j = \inprd{x, e_j}$ for all
+$j \in \{1,...,n\}$ then 
+\begin{align*}
+    \|x - \sum_{j=1}^n \beta_j e_j\|^2
+    &= \|x - \sum_{i=1}^n \inprd{x, e_i} e_i\|^2
+    + \sum_{j=1}^n|\inprd{x, e_j} - \beta_j|^2
+    = \|x - \sum_{i=1}^n \inprd{x, e_i} e_i\|^2
+\end{align*}
+Since $\|x - \sum_{i=1}^n \inprd{x, e_i} e_i\|^2$ is a constant then
+$\|x -y\|$ cannot take a smaller value, i.e. it's the minimum when 
+$\beta_j = \inprd{x, e_j}$.
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{7.}}
+Let $(e_j)$ be any orthonormal sequence in an inner product space $X$ and let
+$x,y \in X$.
+\\
+Let us consider the Cauchy-Schwartz inequality over the sequences $(\inprd{x,e_k})$ 
+and $(\inprd{y,e_k})$, then
+\begin{align*}
+    \sum_{k=1}^\infty |\inprd{x, e_k}\inprd{y, e_k}|
+    \leq \sqrt{\sum_{j=1}^\infty|\inprd{x, e_j}|^2}
+    \sqrt{\sum_{m=1}^\infty|\inprd{y, e_m}|^2}
+\end{align*}
+We know that $\sum_{j=1}^\infty|\inprd{x, e_j}|^2 \leq \|x\|^2$ because of (12)
+hence
+\begin{align*}
+    \sum_{k=1}^\infty |\inprd{x, e_k}\inprd{y, e_k}|
+    \leq \sqrt{\|x\|^2}\sqrt{\|y\|^2} = \|x\|\|y\|
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{8.}}
+Let $x \in X$ where $X$ is an inner product space and let $n_m$ be the number
+of $\inprd{x,e_k}$ such that $|\inprd{x,e_k}| > 1/m$.
+\\
+From equation (12) we know that
+\begin{align*}
+    \sum_{k=1}^\infty |\inprd{x,e_k}|^2 \leq \|x\|^2
+\end{align*}
+So we see that
+\begin{align*}
+     \frac{n_m}{m^2} < \sum_{k=1}^\infty |\inprd{x,e_k}|^2 \leq \|x\|^2
+\end{align*}
+Therefore, must be that
+\begin{align*}
+     n_m < m^2\|x\|^2
+\end{align*}
+
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{9.}}
+Let the sequence $(x_0, x_1, x_2, ...)$ where $x_j(t) = t^j$ on the interval
+$[-1,1]$ where 
+\begin{align*}
+    \inprd{x,y} = \int_{-1}^1 x(t)y(t)~dt
+\end{align*}
+To orthonormalize the first three terms of the sequence we follow the 
+Gram-Schmidt process.
+Let us compute first $\|x_0\|$ as follows
+\begin{align*}
+    \|x_0\| &= \sqrt{\inprd{x_0, x_0}} = \sqrt{\int_{-1}^1 x_0(t)x_0(t)~dt}
+    = \sqrt{\int_{-1}^1 t^0t^0~dt} = \sqrt{\int_{-1}^1~dt} = \sqrt{2}
+\end{align*}
+So the first element of our orthonormalized sequence is
+\begin{align*}
+    e_0 = \frac{1}{\|x_0\|} x_0 = \frac{1}{\sqrt{2}}\cdot t^0 = \frac{1}{\sqrt{2}}
+\end{align*}
+Now we compute $v_1$ as 
+\begin{align*}
+    v_1 &= x_1 - \inprd{x_1, e_0}e_0\\
+    &= t - \frac{1}{\sqrt{2}}\cdot\int_{-1}^1 t\cdot \frac{1}{\sqrt{2}}~dt\\
+    &= t - \frac{1}{2}\int_{-1}^1 t ~dt\\
+    &= t - \frac{1}{2}\bigg[\frac{t^2}{2}\bigg]_{-1}^1\\
+    &= t
+\end{align*}
+So the norm of $v_1$ is
+\begin{align*}
+    \|v_1\| = \sqrt{\int_{-1}^1 t^2~dt} = \sqrt{\frac{2}{3}}
+\end{align*}
+Then, the second element of the sequence is given by
+\begin{align*}
+    e_1 &= \frac{1}{\|v_1\|} v_1 = \sqrt{\frac{3}{2}}t
+\end{align*}
+Finally, we compute $v_2$ as
+\begin{align*}
+    v_2 &= x_2 - \inprd{x_2, e_1}e_1 - \inprd{x_2, e_0}e_0\\
+    &= t^2 - \sqrt{\frac{3}{2}}t\cdot\int_{-1}^1 t^2\cdot \sqrt{\frac{3}{2}}t~dt
+    - \frac{1}{\sqrt{2}}\cdot\int_{-1}^1 t^2\cdot \frac{1}{\sqrt{2}}~dt\\
+    &= t^2 - \frac{3}{2}t\cdot\int_{-1}^1 t^3~dt
+    - \frac{1}{2}\int_{-1}^1 t^2~dt\\
+    &= t^2 - \frac{1}{3}
+\end{align*}
+Hence
+\begin{align*}
+    \|v_2\|
+    &= \sqrt{\int_{-1}^1 \bigg(t^2 - \frac{1}{3}\bigg)^2~dt}\\
+    &= \sqrt{\int_{-1}^1 \bigg(t^4 - \frac{2t^2}{3} + \frac{1}{9}\bigg)~dt}\\
+    &= \sqrt{\frac{2}{5} - \frac{4}{9} + \frac{2}{9}}\\
+    &= \sqrt{\frac{8}{45}}
+\end{align*}
+so the third element of the sequence is
+\begin{align*}
+    e_2 = \frac{1}{\|v_2\|}v_2
+    = \sqrt{\frac{45}{8}}\bigg(t^2 - \frac{1}{3}\bigg)
+\end{align*}
+Just as a small sanity check we compute $\|e_2\|$ as follows
+\begin{align*}
+    \|e_2\| &= \sqrt{\int_{-1}^1 \frac{45}{8}\bigg(t^2 - \frac{1}{3}\bigg)^2~dt}\\
+    &= \sqrt{\frac{45}{8}}\sqrt{\int_{-1}^1 \bigg(t^2 - \frac{1}{3}\bigg)^2~dt}\\
+    &= \sqrt{\frac{45}{8}}\|v_2\|\\
+    &= \sqrt{\frac{45}{8}}\sqrt{\frac{8}{45}}\\
+    &= 1
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\subsection*{3.5 - Series Related to Orthonormal Sequences and Sets}
+\begin{proof}{\textbf{1.}}
+Suppose (6) converges to $x$ i.e.
+\begin{align*}
+    \sum_{k=1}^\infty \alpha_ke_k = x
+\end{align*}
+Then by Theorem 3.5-2 we know that (7)
+\begin{align*}
+    \sum_{k=1}^\infty |\alpha_k|^2
+\end{align*}
+converges.
+\\
+Let us take the squared norm of $x$ then we have that
+\begin{align*}
+    \|x\|^2 = \bigg\|\sum_{k=1}^\infty \alpha_ke_k\bigg\|^2
+\end{align*}
+But since every $\alpha_ke_k$ is orthonormal then by the Pythagorean relation
+we have that
+\begin{align*}
+    \bigg\|\sum_{k=1}^\infty \alpha_ke_k\bigg\|^2
+    = \sum_{k =1}^\infty \|\alpha_ke_k\|^2
+\end{align*}
+Therefore
+\begin{align*}
+    \|x\|^2 = \bigg\|\sum_{k=1}^\infty \alpha_ke_k\bigg\|^2
+    = \sum_{k =1}^\infty \|\alpha_ke_k\|^2
+    = \sum_{k =1}^\infty |\alpha_k|^2\|e_k\|^2
+    = \sum_{k =1}^\infty |\alpha_k|^2
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{3.}}
+Let us consider the orthonormal sequence
+\begin{align*}
+    e_1 &= (0, 1, 0, 0, ...)\\
+    e_2 &= (0, 0, 1, 0, ...)\\
+    e_3 &= (0, 0, 0, 1, ...)\\
+    &\vdots
+\end{align*}
+And let us consider the sequence
+\begin{align*}
+    x = (1, 0, 0, 0, ...) \in l^2
+\end{align*}
+Then we see that
+\begin{align*}
+    \sum_{k=1}^\infty \inprd{x, e_k}e_k = (0, 0, 0, 0, ...)
+    \neq (1, 0, 0, 0, ...) = x
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{4.}}\\
+Let $(x_j)\subset X$ such that $\|x_1\| + \|x_2\| + ...$ converges.
+\\
+We want to prove that $(s_n)$ is Cauchy where $s_n = \sum_{i=1}^n x_i$.
+Taking $n', m' \in \N$ such that $n' < m'$, we see that 
+\begin{align*}
+    \bigg\|\sum_{i=1}^{n'} x_i - \sum_{j=1}^{m'} x_j\bigg\|
+    = \bigg\|\sum_{i=n'+1}^{m'} x_i\bigg\|
+    \leq \sum_{i=n'+1}^{m'} \|x_i\|
+\end{align*}
+On the other hand, since $\sum_i \|x_i\|$ converges then, it's Cauchy, so,
+given $\epsilon > 0$ there is $N\in \N$ such that when $n,m \geq N$ we have that
+\begin{align*}
+    \bigg|\sum_{i=1}^n\|x_i\| - \sum_{j=1}^m\|x_j\|\bigg| < \epsilon
+\end{align*}
+We may assume that $n < m$, then
+\begin{align*}
+    \bigg|\sum_{i=n+1}^m\|x_i\|\bigg| = \sum_{i=n+1}^m\|x_i\|< \epsilon
+\end{align*}
+Hence, taking $n' = n$ and $m' = m$ we see that
+\begin{align*}
+    \bigg\|\sum_{i=1}^{n} x_i - \sum_{j=1}^{m} x_j\bigg\|
+    = \bigg\|\sum_{i=n+1}^{m} x_i\bigg\|
+    \leq \sum_{i=n+1}^{m} \|x_i\| < \epsilon
+\end{align*}
+Therefore $(s_n)$ is Cauchy.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{5.}}\\
+From problem \textbf{4.} we know that if $X$ is an inner product space and
+$\sum_{i} \|x_i\|$ converges then the sequence $(s_n)$ with
+$s_n = \sum_{i=1}^n x_i$ is Cauchy.
+\\
+If instead we take $(s_n)$ in a Hilbert space $H$, the space is complete so
+all Cauchy sequences converge, hence the sequence of partial sums $(s_n)$
+converge to some limit $s$, so we have that
+\begin{align*}
+    \sum_{i=1}^\infty x_i = \lim_{n\to \infty}\sum_{i=1}^n x_i
+    = \lim_{n\to \infty} s_n = s
+\end{align*}
+Which implies that $\sum_{i=1}^\infty x_i$ converges.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{6.}}\\
+Let $(e_j)$ be an orthonormal sequence in Hilbert space $H$ and let 
+\begin{align*}
+    x = \sum_{j=1}^\infty \alpha_j e_j
+    \qquad
+    y = \sum_{j=1}^\infty \beta_j e_j
+\end{align*}
+Let us define the partial sums sequences
+\begin{align*}
+    x_n = \sum_{j=1}^n \alpha_j e_j
+    \qquad
+    y_n = \sum_{j=1}^n \beta_j e_j
+\end{align*}
+we see that $x_n \to x$ and $y_n \to y$ as $n \to \infty$.
+\\
+Then
+\begin{align*}
+    \inprd{x_n, y_n} 
+    = \inprd{\sum_{j=1}^n \alpha_j e_j, \sum_{i=1}^n \beta_i e_i}
+    = \sum_{j=1}^n \alpha_j\sum_{i=1}^n\overline{\beta_i}\inprd{e_j, e_i}
+    = \sum_{j=1}^n \alpha_j\overline{\beta_j}
+\end{align*}
+Because $x_n \to x$, $y_n \to y$ and the continuity of the inner product we
+have that $\inprd{x_n, y_n} \to \inprd{x, y}$. Therefore
+\begin{align*}
+    \inprd{x, y} = \lim_{n\to\infty}\inprd{x_n, y_n}
+    = \lim_{n\to\infty} \sum_{j=1}^n \alpha_j\overline{\beta_j}
+    = \sum_{j=1}^\infty \alpha_j\overline{\beta_j}
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{7.}}\\
+Let $(e_k)$ be an orthonormal sequence in a Hilbert space $H$ and let $x\in H$.
+We want to show that
+$$y = \sum_{k=1}^\infty \inprd{x,e_k}e_k$$
+exists in $H$ and that $x -y$ is orthogonal to every $e_k$.
+\\
+Let us consider the partial sum sequence
+\begin{align*}
+    y_n = \sum_{k=1}^n \inprd{x,e_k}e_k
+\end{align*}
+If we let $m < n$ then we see that
+\begin{align*}
+    \|y_n - y_m\|^2
+    &= \bigg\|\sum_{k=1}^n \inprd{x,e_k}e_k - \sum_{j=1}^m \inprd{x,e_j}e_j\bigg\|^2\\
+    &= \bigg\|\sum_{k=m+1}^n \inprd{x,e_k}e_k\bigg\|^2\\
+    &= \sum_{k=m+1}^n \|\inprd{x,e_k}e_k\|^2\\
+    &= \sum_{k=m+1}^n |\inprd{x,e_k}|^2
+\end{align*}
+On the other hand, by Bessel inequality we know that
+$\sum_{k=1}^\infty |\inprd{x,e_k}|^2$ converges so the tail of the series
+$\sum_{k=m+1}^n |\inprd{x,e_k}|^2$ must tend to 0 as $n,m \to \infty$.
+\\
+Therefore $\|y_n - y_m\|^2 \to 0$ as $n,m \to \infty$ and hence $(y_n)$ is
+Cauchy and since $(y_n) \in H$ then $(y_n)$ converges. So 
+\begin{align*}
+    y = \lim_{n\to\infty}\sum_{k=1}^n \inprd{x,e_k}e_k = \sum_{k=1}^\infty \inprd{x,e_k}e_k
+\end{align*}
+exists in $H$.
+\\
+Let us consider now the following
+\begin{align*}
+    \inprd{x - y_n, e_k}
+    &= \inprd{x - \sum_{j=1}^n \inprd{x,e_j}e_j, e_k}\\
+    &= \inprd{x, e_k} - \inprd{\sum_{j=1}^n \inprd{x,e_j}e_j, e_k}\\
+    &= \inprd{x, e_k} - \sum_{j=1}^n \inprd{x,e_j}\inprd{e_j, e_k}
+\end{align*}
+Now taking the limit as $n \to \infty$ we get that
+\begin{align*}
+    \lim_{n\to \infty}\inprd{x - y_n, e_k}
+    &= \inprd{x, e_k} - \lim_{n\to \infty}\sum_{j=1}^n \inprd{x,e_j}\inprd{e_j, e_k}\\
+    \inprd{x - y, e_k}
+    &= \inprd{x, e_k} - \sum_{j=1}^\infty \inprd{x,e_j}\inprd{e_j, e_k}\\
+    \inprd{x - y, e_k} &= \inprd{x, e_k} - \inprd{x,e_k}\\
+    \inprd{x - y, e_k} &= 0
+\end{align*}
+Where we used the continuity of the inner product, to show that as $n\to\infty$
+we have that $\inprd{x - y_n, e_k} \to \inprd{x - y, e_k}$.
+\\
+Therefore $x -y$ is orthogonal to every $e_k$.
+\begin{align*}
+    \inprd{\sum_{j=1}^\infty \inprd{x,e_j}e_j, e_k}
+    &= \sum_{j=1}^\infty \inprd{x,e_j}\inprd{e_j, e_k}
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{8.}}\\
+Let $(e_k)$ be an orthonormal sequence in a Hilbert space $H$ and let $M$ be
+$M = \text{span}(e_k)$.
+\begin{itemize}
+\item [($\Rightarrow$)]
+Let $x \in \bar{M}$ then $x$ can be written as 
+\begin{align*}
+    x = \sum_{k=1}^\infty \alpha_k e_k
+\end{align*}
+Where $\alpha_k$ are scalars. Since the summation converges to $x$ then by
+Theorem 3.5-2 (b) we know the coefficients $\alpha_k$ are the Fourier 
+coefficients $\inprd{x, e_k}$ so $x$ can be written as
+\begin{align*}
+    x = \sum_{k=1}^\infty \inprd{x, e_k}e_k
+\end{align*}
+\item [($\Leftarrow$)]
+Let $x\in H$ such that it can be written as
+\begin{align*}
+    x = \sum_{k=1}^\infty \inprd{x, e_k}e_k
+    = \sum_{k=1}^\infty \alpha_ke_k
+\end{align*}
+Then $x$ is an infinite linear combination of the elements of the orthonormal
+sequence $(e_k)$ so must be that $x \in \bar{M}$.
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{9.}}\\
+Let $(e_n)$ and $(\tilde{e}_n)$ be orthonormal sequences in a Hilbert space $H$
+and let $M_1 = \text{span}(e_n)$ and $M_2 = \text{span}(\tilde{e}_n)$.
+\begin{itemize}
+\item [($\Rightarrow$)] Let $\bar{M}_1 = \bar{M}_2$. By problem 8 we know
+that if $x \in \bar{M}_1$ and $x \in H$ then it can be written as
+\begin{align*}
+    x = \sum_{m=1}^\infty \alpha_m e_{m} = \sum_{m=1}^\infty \inprd{x, e_m} e_{m}
+\end{align*}
+We note that $e_n \in \bar{M}_2$ then we can write it as
+\begin{align*}
+    e_n = \sum_{m=1}^\infty \inprd{e_n, \tilde{e}_{m}} \tilde{e}_{m}
+    = \sum_{m=1}^\infty \alpha_{nm} \tilde{e}_{m}
+\end{align*}
+Where we defined $\alpha_{nm} = \inprd{e_n, \tilde{e}_{m}}$.\\
+In the same way, since $\tilde{e}_n \in M_1$ then we can write it as
+\begin{align*}
+    \tilde{e}_n = \sum_{m=1}^\infty \inprd{\tilde{e}_n, e_{m}} e_{m}
+    = \sum_{m=1}^\infty \overline{\inprd{e_{m}, \tilde{e}_n}} e_{m}
+    = \sum_{m=1}^\infty \bar{\alpha}_{mn} e_{m}
+\end{align*}
+\item [($\Leftarrow$)] Let us suppose that
+\begin{align*}
+    e_n = \sum_{m=1}^\infty \alpha_{nm} \tilde{e}_{m}
+    \quad\text{and}\quad
+    \tilde{e}_n = \sum_{m=1}^\infty \bar{\alpha}_{mn} e_{m}
+\end{align*}
+Where $\alpha_{nm} = \inprd{e_n, \tilde{e}_{m}}$.\\
+We see that $e_n$ and $\tilde{e}_n$ can be written in the form of equation (6)
+then the orhtonormal sequence $(e_n)$ is both in $\bar{M}_1$ and $\bar{M}_2$
+and the orhtonormal sequence $(\tilde{e}_n)$ is also in $\bar{M}_1$ and
+$\bar{M}_2$.\\
+Let us take $x \in \bar{M}_1$ then by problem 8 we know that $x$ can be written
+as
+\begin{align*}
+    x &= \sum_{m=1}^\infty \inprd{x, e_m} e_{m}
+\end{align*}
+But since the orthonormal sequence $(e_n)$ is also in $\bar{M}_2$ then this
+implies that $x \in \bar{M}_2$ and since $x$ is arbitrary then 
+\begin{align*}
+   \bar{M}_1 \subset \bar{M}_2
+\end{align*}
+The opposite can be proven if $x \in \bar{M}_2$ so we get that
+\begin{align*}
+   \bar{M}_1 = \bar{M}_2
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\subsection*{3.6 - Total Orthonormal Sets and Sequences}
+\begin{proof}{\textbf{1.}}\\
+Let $F$ be an orthonormal basis in an inner product space $X$. We know that
+\begin{align*}
+    \overline{\Span{F}} = X
+\end{align*}
+so if $x \in X$ can be represented as a linear combination of elements of $F$
+then $x \in \Span{F}$ but it could happen that $x \in X$ but it cannot be
+represented as a finite linear combination of elements in $F$.
+\\
+For example, let us consider $X = l^2$ then if we take $F$ as
+\begin{align*}
+    F = \{
+        (1,0, 0, ...), 
+        (0, 1, 0, ...),
+        (0, 0, 1, ...),
+        ...
+    \}
+\end{align*}
+We see that $\overline{\Span{F}} = l^2$, also, the sequence 
+$(1, 1/2, 1/3, ...) \in l^2$ but is not in $\Span{F}$ since it's infinite.
+\end{proof}
+
+\begin{proof}{\textbf{2.}}\\
+Suppose the orthogonal dimension of a hilbert space $H$ is finite, then there
+is a total orthonormal set $T$ with finite number of elements in it,
+let us suppose this number is $n$, but by Lemma 3.4-2 we know that orthonormal
+sets are linealy independent so inside $H$ we have a set of $n$ linearly
+independent elements.
+\\
+Let us suppose that there is, for example, one more element that is linearly
+independent with respect to the $n$ previous elements, we want to arrive at 
+a contradiction. So, in total we have $n + 1$ linearly independent elements,
+then, we can build an orthonormal set $F$ of $n + 1$ elements using the
+Gram-Schmidt process, since this new orthonormal set was built from the
+original total orthonormal set $T$ then also, must be that $\Span{F}$ is
+dense in $H$, but for this to happen by Lemma 3.3-7 must be that
+$\Span{F}^\perp = \{0\}$ which implies that $\Span{T}^\perp \neq \{0\}$ in the
+first place.
+\\
+This is a contradiction and must be that there cannot be more than $n$
+linearly independent sets if the orthogonal dimension of $H$ is $n$.
+\\
+Therefore, the vector space $H$ is of dimension $n$.
+\\
+Now, suppose $H$ is considered as a vector space is of dimension $n$ (finite),
+then there is a linearly independent set with $n$ elements in it.
+We can obtain an orthonormal set of $n$ elements by applying the Gram-Schmidt
+process and we observe that all elements of $H$ are in the span of the
+orthonormal set, so the orthonormal set is total, hence, the orthogonal
+dimension of $H$ is $n$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{4.}}\\
+Let us consider first the case of a complex inner product space.
+From Parseval relation we note that
+\begin{align*} \|x - y\|^2 &= \sum_{k} |\inprd{x - y, e_k}|^2 \end{align*}
+Hence, from the LHS we see that
+\begin{align*} 
+    \|x - y\|^2 &= \inprd{x - y, x - y}
+    = \inprd{x, x} - \inprd{x,y} - \inprd{y, x} + \inprd{y,y}
+\end{align*}
+And, from the RHS we have that
+\begin{align*}
+    \sum_{k} |\inprd{x - y, e_k}|^2
+    &= \sum_{k} \inprd{x - y, e_k}\overline{\inprd{x - y, e_k}}\\
+    &= \sum_{k} (\inprd{x, e_k}-\inprd{y, e_k})(\overline{\inprd{x, e_k}} - \overline{\inprd{y,e_k}})\\
+    &= \sum_{k} \inprd{x, e_k}\overline{\inprd{x, e_k}} - \inprd{y, e_k}\overline{\inprd{x, e_k}} - \inprd{x, e_k}\overline{\inprd{y,e_k}} + \inprd{y, e_k}\overline{\inprd{y,e_k}}\\
+    &= \sum_{k} |\inprd{x, e_k}|^2 - \inprd{y, e_k}\overline{\inprd{x, e_k}} - \inprd{x, e_k}\overline{\inprd{y,e_k}} + |\inprd{y, e_k}|^2\\
+    &= \inprd{x,x} + \inprd{y,y} -\sum_{k} \inprd{y, e_k}\overline{\inprd{x, e_k}} + \inprd{x, e_k}\overline{\inprd{y,e_k}}
+\end{align*}
+Joining both results we see that
+\begin{align*}
+    \inprd{x,y} + \inprd{y, x}
+    &= \sum_{k} \inprd{y, e_k}\overline{\inprd{x, e_k}} + \inprd{x, e_k}\overline{\inprd{y,e_k}}
+\end{align*}
+Now, let us consider
+\begin{align*}
+    \|x - iy\|^2 &= \sum_{k} |\inprd{x - iy, e_k}|^2
+\end{align*}
+From the LHS we see that
+\begin{align*}
+    \|x - iy\|^2 &= \inprd{x - iy, x - iy}\\
+    &= \inprd{x , x} - \inprd{x,iy} - \inprd{iy, x} + \inprd{iy, iy}\\
+    &= \inprd{x , x} + i\inprd{x, y} - i\inprd{y, x} + \inprd{y, y}
+\end{align*}
+And, from the RHS we have that
+\begin{align*}
+    \sum_{k} |\inprd{x - iy, e_k}|^2
+    &= \sum_{k} \inprd{x - iy, e_k}\overline{\inprd{x - iy, e_k}}\\
+    &= \sum_{k} (\inprd{x, e_k}-i\inprd{y, e_k})(\overline{\inprd{x, e_k}}
+    + i\overline{\inprd{y,e_k}})\\
+    &= \sum_{k} \inprd{x, e_k}\overline{\inprd{x, e_k}}
+    - i\inprd{y, e_k}\overline{\inprd{x, e_k}}
+    + i\inprd{x, e_k}\overline{\inprd{y,e_k}} 
+    + \inprd{y, e_k}\overline{\inprd{y,e_k}}\\
+    &= \sum_{k} |\inprd{x, e_k}|^2
+    - i\inprd{y, e_k}\overline{\inprd{x, e_k}}
+    + i\inprd{x, e_k}\overline{\inprd{y,e_k}} 
+    + |\inprd{y, e_k}|^2\\
+    &= \inprd{x,x} + \inprd{y,y} + i\sum_{k}
+    \inprd{x, e_k}\overline{\inprd{y,e_k}}
+    -\inprd{y, e_k}\overline{\inprd{x, e_k}}
+\end{align*}
+Again, joining both results we see that
+\begin{align*}
+    \inprd{x, y} - \inprd{y, x} &= \sum_{k}
+    \inprd{x, e_k}\overline{\inprd{y,e_k}}
+    -\inprd{y, e_k}\overline{\inprd{x, e_k}}
+\end{align*}
+Adding both result equations we get that
+\begin{align*}
+    &\inprd{x,y} + \inprd{y, x}
+    + \inprd{x, y} - \inprd{y, x}\\
+    &\quad= \sum_{k}
+    \inprd{y, e_k}\overline{\inprd{x, e_k}}
+    + \inprd{x, e_k}\overline{\inprd{y,e_k}}
+    + \sum_{k}
+    \inprd{x, e_k}\overline{\inprd{y,e_k}}
+    -\inprd{y, e_k}\overline{\inprd{x, e_k}}
+\end{align*}
+Hence
+\begin{align*}
+    \inprd{x,y} = \sum_{k} \inprd{x, e_k}\overline{\inprd{y,e_k}}
+\end{align*}
+
+Let us consider now the case of a real inner product space.
+From the polarization identity we know that
+\begin{align*}
+    \inprd{x,y} = \frac{1}{2}(\|x\|^2 + \|y\|^2 - \|x-y\|^2)
+\end{align*}
+Hence
+\begin{align*}
+    \inprd{x,y} &= \frac{1}{2}(
+    \inprd{x,x} + \inprd{y,y} - \inprd{x,x} - \inprd{y,y}
+    + \sum_{k}
+    \inprd{y, e_k}\inprd{x, e_k}
+    + \inprd{x, e_k}\inprd{y,e_k})\\
+    &= \frac{1}{2}(
+    2\sum_{k}\inprd{x, e_k}\inprd{y,e_k})\\
+    &= \sum_{k} \inprd{x, e_k}\inprd{y,e_k}
+\end{align*}
+Where we used the previous result we got for $\|x-y\|^2$ and that
+$\inprd{x, e_k} = \inprd{e_k, x}$ in a real inner product space.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{5.}}\\
+Let $(e_\kappa)$, with $\kappa \in I$ be an orthonormal family in a Hilbert
+space $H$.
+\begin{itemize}
+\item [$(\Rightarrow)$] Let us suppose $(e_\kappa)$ is total.
+Since Parseval relation
+$$\sum_k |\inprd{x,e_k}|^2 = \|x\|^2$$
+Holds for any total orthonormal set $M$ in a Hilbert space $H$ and we derived 
+the equation 
+\begin{align*}
+    \inprd{x,y} = \sum_k\inprd{x,e_k}\overline{\inprd{y,e_k}}
+\end{align*}
+Using the Parseval relation then it must also hold for the orthonormal family
+$(e_\kappa)$.
+\item [$(\Leftarrow)$] Let us suppose that for every $x,y \in H$ the following 
+equation holds
+\begin{align*}
+    \inprd{x,y} = \sum_\kappa\inprd{x,e_\kappa}\overline{\inprd{y,e_\kappa}}
+\end{align*}
+For the orthonormal family $(e_\kappa)$. Taking $y = x$ we get that 
+\begin{align*}
+    \|x\|^2 = \inprd{x,x}
+    = \sum_\kappa\inprd{x,e_\kappa}\overline{\inprd{x,e_\kappa}}
+    = \sum_\kappa |\inprd{x,e_\kappa}|^2
+\end{align*}
+Then Parseval relation also holds and by Theorem 3.6-3 then must be that
+the orthonormal family $(e_\kappa)$ is total.
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{6.}}\\
+Let $H$ be a separable Hilbert space and $M = \{x_1, x_2, x_3, ...\}$ a
+countable dense subset of $H$.
+Then, let us select
+\begin{align*}
+    e_1 = \frac{x_1}{\|x_1\|}
+\end{align*}
+To select $e_2$ we check if $x_2$ is in $\Span{e_1}$, if it is there then we
+drop it, if it's not then we define $v_2 = x_2 - \inprd{x_2, e_1} e_1$
+and we select
+\begin{align*}
+    e_2 = \frac{v_2}{\|v_2\|}
+\end{align*}
+To select $e_3$ we check if $x_3$ is in $\Span{\{e_1, e_2\}}$, if it is there
+then we drop it, if it's not then we define
+$v_3 = x_3 - \inprd{x_3, e_1} e_1 - \inprd{x_3, e_2} e_2$
+and we select
+\begin{align*}
+    e_3 = \frac{v_3}{\|v_3\|}
+\end{align*}
+i.e. we follow the Gram-Schmidt process dropping some elements if necessary, to
+get an orthonormal sequence $(e_j) \subseteq M$.
+\\
+Since the elements we dropped are in some span then they can be written as a
+linear combination of elements of $(e_j)$, so $M \subseteq \Span{e_j}$
+but also we know that $M$ is a dense subset of $H$ so must be that $\Span{e_j}$
+is also dense in $H$.
+\\
+Therefore $(e_j)$ is a total orthonormal sequence obtained from $M$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{7.}}\\
+Let $H$ be a separable Hilbert space, then there is $M$ a countable dense
+subset in $H$. As we showed before, using the Gram-Schmidt process we can find
+a total orthonormal sequence in $H$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{8.}}\\
+Let $F = (e_j)$ be an orthonormal sequence in a separable Hilbert space $H$.\\
+We know there exists $D = \{d_1, d_2, d_3, ...\}$, a countable dense subset
+of $H$, because $H$ is separable.\\
+Let us take $d_1$, if $d_1$ is linearly independent from the rest of the
+elements in $D$ we keep it.\\
+Next, we compute
+\begin{align*}
+    v_1 = d_1 - \sum_{k=1}^{\infty}\inprd{d_1, e_k}e_k
+\end{align*}
+and
+\begin{align*}
+    x_1 = \frac{v_1}{\|v_1\|}
+\end{align*}
+i.e. we follow the Gram-Schmidt process to orthonormalize $d_1$.\\
+Finally, we add $x_1$ to a new orthogonal sequence $\tilde{F}$ defined as
+\begin{align*}
+    \tilde{F} = \{x_1, x_2, ...,  e_1, e_2, ...\}
+\end{align*}
+To get each $x_i$ we follow the same process for each $d_i$.
+If $d_i$ is not linearly independent we drop it and continue.\\
+Following this process we see that $\tilde{F}$ is an orthonormal sequence, 
+and since we started from a countable dense subset $D$, then $\Span{\tilde{F}}$
+must also be dense in $H$, since we only dropped the elements that were
+linearly dependent to the other elements.\\
+Therefore $\tilde{F}$ is a total orthonormal sequence that contains $F$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{9.}}\\
+Let $M$ be a total set in an inner product space $X$ and
+let $\inprd{v,x} = \inprd{w,x}$ for all $x \in M$. We note that
+\begin{align*}
+    \inprd{v,x} &= \inprd{w,x}\\
+    \inprd{v,x} - \inprd{w,x} &= 0\\
+    \inprd{v - w, x} &= 0
+\end{align*}
+This implies that $v - w\perp x$ but because Theorem 3.6-2, there is no element
+in $X$ which is orthogonal to every element in $M$ so must be that $v -w = 0$
+and therefore $v = w$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{10.}}\\
+Let $M$ be a subset of a Hilbert space $H$ and let $v, w \in H$. Suppose that
+$\inprd{v,x} = \inprd{w,x}$ for all $x \in M$ implies that $v = w$.
+\\
+If $M$ is not total then there is some $y \in H$, $y \neq 0$ such that
+$y \perp M$, we want to arrive at a contradiction.
+\\
+Then $\inprd{y, x} = 0$, but also we know that 
+$\inprd{0, x} = 0$ so $\inprd{y, x} = \inprd{0, x}$ hence $y = 0$ but $y$ was
+different from 0, a contradiction.
+\\ 
+Therefore $M$ is total in $H$.
 \end{proof}
 \end{document}
