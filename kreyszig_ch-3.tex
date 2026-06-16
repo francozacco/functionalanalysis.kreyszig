@@ -7,6 +7,7 @@
 \usepackage{adjustbox}
 \usepackage{mathrsfs}
 \usepackage{graphicx}
+\usepackage{physics}
 \usepackage{siunitx}
 \usepackage[mathscr]{euscript}
 
@@ -1679,5 +1680,742 @@ $\inprd{0, x} = 0$ so $\inprd{y, x} = \inprd{0, x}$ hence $y = 0$ but $y$ was
 different from 0, a contradiction.
 \\ 
 Therefore $M$ is total in $H$.
+\end{proof}
+
+\cleardoublepage
+\subsection*{3.7 - Legendre, Hermite and Laguerre Polynomials}
+\begin{proof}{\textbf{1.}}\\
+The Legendre differential equation is
+\begin{align*}
+    (1 - t^2)P_n'' - 2tP_n' + n(n + 1)P_n = 0
+\end{align*}
+We note that applying the product rule to $[(1 - t^2)P_n']'$ gives us
+\begin{align*}
+    [(1 - t^2)P_n']' = (1 - t^2)'P_n' + (1 - t^2)P_n''
+    = (1 - t^2)P_n'' - 2tP_n'
+\end{align*}
+Then we can write the Legendre differential equation as
+\begin{align*}
+    [(1 - t^2)P_n']' = -n(n + 1)P_n 
+\end{align*}
+Multiplying this equation by $P_m$, where $m \neq n$, gives us
+\begin{align*}
+    P_m[(1 - t^2)P_n']' = -n(n + 1)P_nP_m
+\end{align*}
+The corresponding equation for $P_m$ multiplied by $-P_n$ is
+\begin{align*}
+    -P_n[(1 - t^2)P_m']' = m(m + 1)P_mP_n
+\end{align*}
+Then, adding the equation and integrating from -1 to 1 we see that
+\begin{align*}
+    \int_{-1}^1 P_m[(1 - t^2)P_n']' -P_n[(1 - t^2)P_m']'~dt
+    &= \int_{-1}^1 m(m + 1)P_mP_n -n(n + 1)P_nP_m ~dt\\
+    &= [m(m + 1) -n(n + 1)]\int_{-1}^1 P_nP_m~dt
+\end{align*}
+Let us integrate $\int_{-1}^1 P_m[(1 - t^2)P_n']'~dt$ by parts 
+\begin{align*}
+    \int_{-1}^1 P_m[(1 - t^2)P_n']'~dt
+    &= P_m[(1 - t^2)P_n'] \bigg|_{-1}^1 - \int_{-1}^1 P_m'[(1 - t^2)P_n']~dt\\
+    &= 0 - \int_{-1}^1 (1 - t^2)P_n'P_m'~dt
+\end{align*}
+In the same way for $\int_{-1}^1 P_n[(1 - t^2)P_m']'~dt$ we get that
+\begin{align*}
+    \int_{-1}^1 P_n[(1 - t^2)P_m']'~dt
+    &= P_n[(1 - t^2)P_m'] \bigg|_{-1}^1 - \int_{-1}^1 P_n'[(1 - t^2)P_m']~dt\\
+    &= 0 - \int_{-1}^1 (1 - t^2)P_n'P_m'~dt
+\end{align*}
+Therefore
+\begin{align*}
+    &\int_{-1}^1 P_m[(1 - t^2)P_n']' -P_n[(1 - t^2)P_m']'~dt\\
+    &\quad= - \int_{-1}^1 (1 - t^2)P_n'P_m'~dt + \int_{-1}^1 (1 - t^2)P_n'P_m'~dt\\
+    &\quad= 0
+\end{align*}
+So
+\begin{align*}
+    \inprd{P_n, P_m} = \int_{-1}^1 P_nP_m~dt = 0
+\end{align*}
+Hence $(P_n)$ is an orthogonal sequence in the space $L^2[-1,1]$.
+
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{2.}}\\
+The binomial theorem states that
+\begin{align*}
+    (a + b)^n = \sum_{j=0}^n \frac{n!}{j! (n -j)!} a^{n-j} b^j
+\end{align*}
+So in this case we can apply it to $(t^2 - 1)^n$ as follows
+\begin{align*}
+    (t^2 - 1)^n = \sum_{j=0}^n \frac{n!}{j! (n -j)!} t^{2n-2j} (-1)^j
+\end{align*}
+Let us take the $n$th derivative of $t^{2n - 2j}$, we get that
+\begin{align*}
+    \dv[n]{t}t^{2n-2j}
+    &= (2n - 2j) \dv[n-1]{t}t^{2n - 2j - 1}\\ 
+    &= (2n - 2j)\cdot(2n - 2j - 1) \dv[n-2]{t}t^{2n - 2j - 2}\\
+    &\quad\vdots\\
+    &= [(2n - 2j)\cdot(2n - 2j - 1)\cdot ... \cdot(2n - 2j - n)]t^{2n - 2j - n}\\
+    &= \frac{(2n - 2j)!}{(n - 2j)!}t^{n - 2j}
+\end{align*}
+Hence
+\begin{align*}
+    \dv[n]{t}(t^2 - 1)^n = \sum_{j=0}^n (-1)^j \frac{n!}{j! (n -j)!}
+    \frac{(2n - 2j)!}{(n - 2j)!}t^{n - 2j}
+\end{align*}
+Therefore
+\begin{align*}
+    P_n(t) &= \frac{1}{2^n n!}\dv[n]{t}[(t^2 - 1)^n] \\
+    &= \frac{1}{2^n n!}\sum_{j=0}^n (-1)^j \frac{n!}{j! (n -j)!}
+    \frac{(2n - 2j)!}{(n - 2j)!}t^{n - 2j}\\
+    &= \sum_{j=0}^n (-1)^j \frac{(2n - 2j)!}{2^n j! (n -j)! (n - 2j)!} t^{n - 2j}
+\end{align*}
+
+
+
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{3.}}\\
+Let us consider the LHS as a binomial series
+\begin{align*}
+    \frac{1}{\sqrt{1 - 2tw + w^2}}
+    = (1 - 2tw + w^2)^{-1/2}
+    = \sum_{k = 0}^\infty \binom{-1/2}{k} (- 2tw + w^2)^k
+\end{align*}
+Now applying the binomial theorem we get that
+\begin{align*}
+    \frac{1}{\sqrt{1 - 2tw + w^2}}
+    &= \sum_{k = 0}^\infty \binom{-1/2}{k} \sum_{j = 0}^k \binom{k}{j}(- 2tw)^{k-j} w^{2j}\\
+    &= \sum_{k = 0}^\infty \binom{-1/2}{k}
+    \sum_{j = 0}^k (-1)^{k-j}\binom{k}{j}2^{k-j} t^{k-j} w^{2j + k - j}\\
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^k
+    (-1)^{k-j}\frac{(-1/2) (-1/2 - 1) ... (-1/2 - k + 1)}{k!}
+    \frac{k!}{j!(k - j)!}2^{k-j} t^{k-j} w^{j + k}\\
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^k
+    (-1)^{k-j}\frac{2^k(-1/2) (-1/2 - 1) ... (-1/2 - k + 1)}{2^kj!(k - j)!}
+    2^{k-j} t^{k-j} w^{j + k}\\
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^k
+    (-1)^{k-j}\frac{2^k\prod_{i=0}^{k-1} -(2i + 1)/2}{2^j j!(k - j)!}
+    t^{k-j} w^{j + k}\\
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^k
+    (-1)^{k-j}\frac{\prod_{i=0}^{k-1} -(2i + 1)}{2^j j!(k - j)!}
+    t^{k-j} w^{j + k}\\
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^k
+    (-1)^{k-j}\frac{(-1)^{k}\prod_{i=0}^{k-1}(2i + 1)}{2^j j!(k - j)!}
+    t^{k-j} w^{j + k}\\
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^k
+    (-1)^{2k-j}\frac{2k !}{2^{k+ j} k! j!(k - j)!}
+    t^{k-j} w^{j + k}\\
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^k
+    (-1)^{j}\frac{2k !}{2^{k+ j} k! j!(k - j)!}
+    t^{k-j} w^{j + k}
+\end{align*}
+Where we used in the last step that $(-1)^{2k -j} = (-1)^{2k}(-1)^{-j}
+= 1 \cdot (-1)^{j}$.\\
+Applying the formula $\sum_{k=0}^\infty \sum_{j=0}^k C_{j,k}t^{k+j}
+= \sum_{k=0}^\infty \sum_{j=0}^{k/2} C_{j, k-j}t^{k}$ we get that
+\begin{align*}
+    \frac{1}{\sqrt{1 - 2tw + w^2}}
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^{k/2}
+    (-1)^{j}\frac{(2(k -j))!}{2^{k - j+ j} (k-j)! j!(k - j - j)!}
+    t^{(k - j) - j} w^{j + k - j}\\
+    &= \sum_{k = 0}^\infty \sum_{j = 0}^{k/2}
+    (-1)^{j}\frac{(2k - 2j)!}{2^{k} (k-j)! j!(k - 2j)!}
+    t^{k -2j} w^{k}\\
+    &= \sum_{k = 0}^\infty P_k(t) w^{k}
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{4.}}\\
+Let us consider 
+\begin{align*}
+    \frac{1}{r} = \frac{1}{\sqrt{r_1^2 + r_2^2 - 2r_1r_2\cos\theta}}
+\end{align*}
+but let us write it as
+\begin{align*}
+    \frac{1}{\sqrt{r_1^2 + r_2^2 - 2r_1r_2\cos\theta}}
+    = \frac{1}{r_2}\frac{1}{\sqrt{1 + (r_1/r_2)^2 - 2(r_1/r_2)\cos\theta}}
+\end{align*}
+Then taking $w = r_1/r_2$ and $t = \cos\theta$ the RHS has the form 
+$1 /r_2 \sqrt{1 - 2tw + w^2}$ and hence using the result of the previous
+problem we get that
+\begin{align*}
+    &\frac{1}{r_2}\frac{1}{\sqrt{1 - 2(r_1/r_2)\cos\theta + (r_1/r_2)^2}} =\\
+    &\quad= \frac{1}{r_2}\frac{1}{\sqrt{1 - 2wt + w^2}}\\
+    &\quad= \frac{1}{r_2}\sum_{n=0}^\infty P_n(t)w^n\\
+    &\quad= \frac{1}{r_2}\sum_{n=0}^\infty P_n(\cos\theta)
+    \bigg(\frac{r_1}{r_2}\bigg)^n
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{5.}}\\
+Let us consider $x(t) = \sum_{k=0}^\infty c_k t^k$, we note that
+\begin{align*}
+    x(t)' &= \sum_{k=1}^\infty c_k kt^{k-1} \\
+    x(t)'' &= \sum_{k=2}^\infty c_k k(k-1)t^{k-2}
+\end{align*}
+Replacing this into Legendre's differential equation gives us
+\begin{align*}
+    (1 - t^2)x(t)'' - 2tx(t)' + n(n+1)x(t) &= 0\\
+    %
+    (1 - t^2)\sum_{k=2}^\infty c_k k(k-1) t^{k-2}
+    - 2t\sum_{k=1}^\infty c_k kt^{k-1}
+    + n(n+1)\sum_{k=0}^\infty c_k t^{k} &= 0\\
+    %
+    \sum_{k=2}^\infty c_k k(k-1) t^{k-2}
+    - \sum_{k=2}^\infty c_k k(k-1) t^{k}
+    - \sum_{k=1}^\infty 2c_kk t^{k}
+    + \sum_{k=0}^\infty n(n+1)c_k t^{k} &= 0\\
+    %
+    \sum_{k=0}^\infty c_{k + 2} (k + 1)(k + 2) t^{k}
+    - \sum_{k=2}^\infty c_k k(k-1) t^{k}
+    - \sum_{k=1}^\infty 2c_kk t^{k}
+    + \sum_{k=0}^\infty n(n+1)c_k t^{k} &= 0
+\end{align*}
+In the second term for $k = 0$ and $1$ the terms are 0, so we can set the sum to
+start at $k = 0$, the same applies for the third term, hence
+\begin{align*}
+    \sum_{k=0}^\infty [c_{k + 2} (k + 1)(k + 2) - c_k k(k-1) 
+    - 2c_kk + n(n+1)c_k]t^{k} &= 0
+\end{align*}
+Since the sum is equal to 0 then must be that each term is 0, so we get that
+\begin{align*}
+    c_{k + 2} (k + 1)(k + 2) &= [k(k-1) 
+    + 2k - n(n+1)]c_k\\
+    c_{k + 2} &= \frac{k(k-1) 
+    + 2k - n(n+1)}{(k + 1)(k + 2)}c_k
+\end{align*}
+We see that
+\begin{align*}
+    c_2 &= -\frac{n(n+1)}{2}c_0 & k &= 0\\
+    c_3 &= \frac{2 - n(n + 1)}{6}c_1 = -\frac{(n-1)(n+2)}{6}c_1 & k &= 1\\
+    c_4 &= \frac{6 -n(n+1)}{12}c_2 = -\frac{(n -2)(n + 3)}{12}c_2 = & k &= 2\\
+        &= \frac{(n -2)(n + 3)}{12}\frac{n(n+1)}{2}c_0 = 
+        \frac{(n -2)(n + 3)n(n+1)}{24}c_0 &   &  \\
+    &... 
+\end{align*}
+Then we can write $x(t)$ as
+\begin{align*}
+    x(t) &= c_0\bigg[
+        1 - \frac{n(n+1)}{2!}t^2 + \frac{(n -2)(n + 3)n(n+1)}{4!}t^4 + ...
+    \bigg] + \\
+    &+ c_1\bigg[
+        t - \frac{(n-1)(n+2)}{3!}t^3
+        + \frac{(n - 3)(n - 1)(n + 2)(n + 4)}{5!}t^5 + ...
+    \bigg]
+\end{align*}
+or defining $x_1(t)$ an $x_2(t)$ as
+\begin{align*}
+    x_1(t) &= 1 - \frac{n(n+1)}{2!}t^2 + \frac{(n -2)(n + 3)n(n+1)}{4!}t^4 + ...\\
+    x_2(t) &= t - \frac{(n-1)(n+2)}{3!}t^3
+    + \frac{(n - 3)(n - 1)(n + 2)(n + 4)}{5!}t^5 + ...
+\end{align*}
+We can write it as $x(t) = c_0 x_1(t) + c_1 x_2(t)$.\\
+Finally, we note that when $n$ is even, then the term containing $t^{n+2}$ a
+$x_1(t)$ becomes 0, and since the coefficients are recursive, all subsequent
+coefficients become 0. The same thing happens when $n$ is odd, so $x_2(t)$
+becomes also a polynomial.\\
+On the other hand, if we assume that 
+\begin{align*}
+    c_{n-2j} = (-1)^j \frac{(2n - 2j)!}{2^n j! (n-j)! (n -2j)!}
+\end{align*}
+Then $c_{n- 2(j-1)} = c_{n -2j +2}$ must be
+\begin{align*}
+    c_{n-2j+ 2} = (-1)^{j-1} \frac{(2n - 2j + 2)!}{2^n (j-1)! (n-j+1)! (n -2j + 2)!}
+\end{align*}
+But also by the recurrence relation, setting $k=n - 2j$ we have that
+\begin{align*}
+    c_{n - 2j + 2} &= \frac{(n-2j)(n-2j-1) + 2(n - 2j) - n(n+1)}
+    {(n - 2j + 1)(n - 2j + 2)}c_{n-2j}\\
+    &= (-1)^j\frac{(n-2j)(n-2j-1) + 2(n - 2j) - n(n+1)}
+    {(n - 2j + 1)(n - 2j + 2)}\frac{(2n - 2j)!}{2^n j! (n-j)! (n -2j)!}\\
+    &= (-1)^j[(n-2j)(n-2j + 1) - n(n+1)]
+    \frac{(2n - 2j)!}{2^n j! (n-j)! (n -2j + 2)!}\\
+    &= (-1)^j[n^2 -2jn + n -2jn + 4j^2 - 2j - n(n+1)]
+    \frac{(2n - 2j)!}{2^n j! (n-j)! (n -2j + 2)!}\\
+    &= (-1)^j[-4jn + 4j^2 - 2j]
+    \frac{(2n - 2j)!}{2^n j! (n-j)! (n -2j + 2)!}\\
+    &= (-1)^j[-2j(2n - 2j + 1)]
+    \frac{(2n - 2j)!}{2^n j! (n-j)! (n -2j + 2)!}\\
+    &= (-1)^{j-1}\frac{2j!}{(j-1)!}
+    \frac{(2n - 2j + 1)!}{2^n j! (n-j)! (n -2j + 2)!}\\
+    &= (-1)^{j-1}\frac{2(n - j + 1)}{(n -j + 1)}
+    \frac{(2n - 2j + 1)!}{2^n (j-1)! (n-j)! (n -2j + 2)!}\\
+    &= (-1)^{j-1}\frac{(2n - 2j + 2)!}{2^n (j-1)! (n-j + 1)! (n -2j + 2)!}
+\end{align*}
+Therefore the coefficients of $x_1$ and $x_2$ match the coefficients of the
+Legendre polynomials, if we set correctly the $c_0$ and $c_1$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{6.}}\\
+Let us consider the LHS as
+\begin{align*}
+    e^{2wt - w^2} = \sum_{n=0}^\infty \frac{1}{n!}(2wt - w^2)^n
+\end{align*}
+Applying the binomial theorem we get that
+\begin{align*}
+    e^{2wt - w^2}
+    &= \sum_{n=0}^\infty \frac{1}{n!} 
+    \sum_{k=0}^n\binom{n}{k}(2wt)^{n-j} (-w^2)^{j}\\
+    &= \sum_{n=0}^\infty \frac{1}{n!} 
+    \sum_{j=0}^n\frac{n!}{j!(n-j)!}2^{n-j}w^{n-j}t^{n-j}(-1)^jw^{2j}\\
+    &= \sum_{n=0}^\infty \frac{1}{n!}\bigg[
+    n!\sum_{j=0}^n(-1)^j\frac{2^{n-j}}{j!(n-j)!}t^{n-j}w^{n + j}\bigg]
+\end{align*}
+Also, we know that $\sum_{n=0}^\infty \sum_{j=0}^n C_{j,n}t^{n+j}
+= \sum_{n=0}^\infty \sum_{j=0}^{[n/2]} C_{j, n-j}t^{n}$.\\
+Therefore
+\begin{align*}
+    e^{2wt - w^2}
+    &= \sum_{n=0}^\infty \frac{1}{n!}\bigg[
+    n!\sum_{j=0}^{[n/2]} (-1)^j\frac{2^{n-2j}}{j!(n-2j)!}t^{n-2j}w^{n}\bigg]
+    = \sum_{n=0}^\infty \frac{1}{n!} H_n(t) w^{n}
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{7.}}\\
+We know that
+\begin{align*}
+    H_n(t) = (-1)^{n}e^{t^2}\dv[n]{t}(e^{-t^2})
+\end{align*}
+So we see that
+\begin{align*}
+    H_n'(t) &= (-1)^n \bigg[
+        2te^{t^2}\dv[n]{t}(e^{-t^2})
+        + e^{t^2}\dv[n+1]{t}(e^{-t^2})
+    \bigg]\\
+    -H_n'(t) &= -2t(-1)^ne^{t^2}\dv[n]{t}(e^{-t^2})
+    - (-1)^ne^{t^2}\dv[n+1]{t}(e^{-t^2})\\
+    -H_n'(t) &= -2t(-1)^ne^{t^2}\dv[n]{t}(e^{-t^2})
+    + (-1)^{n + 1}e^{t^2}\dv[n+1]{t}(e^{-t^2})
+\end{align*}
+Now, replacing the definition of $H_n(t)$ and that 
+\begin{align*}
+    H_{n+1}(t) &= (-1)^{n+1}e^{t^2}\dv[n+1]{t}(e^{-t^2})
+\end{align*}
+We get that
+\begin{align*}
+    -H_n'(t) &= -2tH_n(t) + H_{n+1}(t)
+\end{align*}
+Therefore
+\begin{align*}
+    H_{n+1}(t) &= 2tH_n(t) - H_{n}'(t)
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{8.}}\\
+Let us differentiate the generating function as follows
+\begin{align*}
+    \dv{t}(e^{2wt - w^2}) = 2we^{2wt - w^2}
+    = \sum_{n=1}^\infty \frac{1}{n!}H_n'(t) w^n
+\end{align*}
+The first term of the sum becomes 0 since $H_0(t) = 1$, so the sum starts at 1.
+Then we have that
+\begin{align*}
+    2w\sum_{n=0}^\infty \frac{1}{n!}H_n(t) w^n
+    &= \sum_{n=1}^\infty \frac{1}{n!}H_n'(t) w^n\\
+    2w\sum_{n=1}^\infty \frac{1}{(n-1)!}H_{n-1}(t) w^{n-1}
+    &= \sum_{n=1}^\infty \frac{1}{n!}H_n'(t) w^n\\
+    2\sum_{n=1}^\infty \frac{1}{n!} n H_{n-1}(t) w^{n}
+    &= \sum_{n=1}^\infty \frac{1}{n!}H_n'(t) w^n\\
+    \sum_{n=1}^\infty \frac{1}{n!} [2n H_{n-1}(t) - H_n'(t)] w^n &= 0
+\end{align*}
+Where in the second step we changed the LHS sum to start from 1. Since the sum
+is equal to 0 then must be that each term is 0, hence
+\begin{align*}
+    H_n'(t) = 2n H_{n-1}(t)
+\end{align*}
+The Hermite differential equation states that
+\begin{align*}
+    H_n'' - 2tH_n' + 2nH_n = 0
+\end{align*}
+From the equation we derived and the result of Problem 7 with $n-1$ 
+we see that
+\begin{align*}
+    H_n'' = 2n H_{n-1}' = 2n(2tH_{n-1} - H_{n})
+\end{align*}
+Now, replacing in the Hermite differential equation we get that
+\begin{align*}
+    H_n'' - 2tH_n' + 2nH_n
+    &= 2n(2tH_{n-1} - H_{n}) - 2t(2n H_{n-1}) + 2nH_n\\
+    &= 4ntH_{n-1} - 2nH_{n} - 4tn H_{n-1} + 2nH_n\\
+    &= 0
+\end{align*}
+Therefore $H_n$ satisfies the Hermite differential equation.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{9.}}\\
+In the asymptotic case the differential equation $y'' + (2n +1 -t^2)y = 0$
+becomes $y'' = t^2y$ for which we know that the solution is $y(t) = e^{-t^2/2}$
+so we may assume that the solution to the original differential equation is of
+the form $y(t) = h(t)e^{-t^2/2}$, replacing this solution into the differential
+equation we have that
+\begin{align*}
+    \dv[2]{y}{t} + (2n +1 -t^2)y &= 0\\
+    \dv[2]{t}(h(t)e^{-t^2/2}) + (2n +1 -t^2)h(t)e^{-t^2/2} &= 0\\
+    e^{-t^2/2}(h(t)'' - 2th(t)' + (t^2 - 1)h(t))
+    + (2n +1 -t^2)h(t)e^{-t^2/2} &= 0\\
+    h(t)'' - 2th(t)' + (t^2 - 1)h(t)
+    + 2nh(t) - (t^2 - 1)h(t) &= 0\\
+    h(t)'' - 2th(t)' + 2nh(t) &= 0
+\end{align*}
+We see that the differential equation is of the form of the Hermite
+differential equation, so $H_n$ is a solution to the equation.\\
+Therefore $H_n(t)e^{-t^2/2}$ is a solution to the original differential
+equation.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{10.}}\\
+Let us take the derivative of $e^{-t^2}H_n'$ as follows
+\begin{align*}
+    (e^{-t^2}H_n')' = -2te^{-t^2}H_n' + e^{-t^2}H_n''
+\end{align*}
+Also, from Problem 8 we know that $H_n' = 2nH_{n-1}$ so
+$$H_n'' = 2nH_{n-1}' = 2n(2tH_{n-1} - H_n)$$
+Where we used that $H_{n-1}' = 2tH_{n-1} - H_n$ from Problem 7.\\
+Hence replacing
+\begin{align*}
+    (e^{-t^2}H_n')'
+    &= -4nte^{-t^2}H_{n-1} + 4nte^{-t^2}H_{n-1} - 2ne^{-t^2}H_n\\
+    &= -2ne^{-t^2}H_n
+\end{align*}
+From the equation we just derived if we let $n \neq m$ and following the same
+method as in Problem 1, we can write that
+\begin{align*}
+    H_m(e^{-t^2}H_n')' - H_n(e^{-t^2}H_m')'
+    &= -2ne^{-t^2}H_nH_m + 2me^{-t^2}H_nH_m\\
+    &= 2e^{-t^2}(m - n)H_nH_m
+\end{align*}
+The (7a) functions state that
+\begin{align*}
+    e_n = A_n e^{-t^2/2}H_n
+\end{align*}
+where $A_n = 1/(2^n n! \sqrt{\pi})^{1/2}$.\\
+We want to check that the functions are orthogonal on $\R$ so we need
+to integrate $e_n e_m$ from $-\infty$ to $\infty$ 
+\begin{align*}
+    A_nA_m\int_{-\infty}^{\infty}  e^{-t^2/2}H_ne^{-t^2/2}H_m~dt
+    &= A_nA_m\int_{-\infty}^{\infty}  e^{-t^2}H_n H_m~dt
+\end{align*}
+We note that this is the same as integrating
+$H_m(e^{-t^2}H_n')' - H_n(e^{-t^2}H_m')'$ times a multiplicative constant, so
+integrating the first term by parts we see that
+\begin{align*}
+    \int_{-\infty}^{\infty}  (e^{-t^2}H_n')'H_m~dt
+    &= e^{-t^2}H_n'H_m\bigg|_{t=-\infty}^{t=\infty}
+    - \int_{-\infty}^{\infty}  e^{-t^2}H_n'H_m'~dt\\
+    &= 0 - \int_{-\infty}^{\infty}  e^{-t^2}H_n'H_m'~dt
+\end{align*}
+In hte same way, integrating by parts the second term we get that
+\begin{align*}
+    -\int_{-\infty}^{\infty}  (e^{-t^2}H_m')'H_n~dt
+    &= -e^{-t^2}H_m'H_n\bigg|_{t=-\infty}^{t=\infty}
+    + \int_{-\infty}^{\infty}  e^{-t^2}H_m'H_n'~dt\\
+    &= 0 + \int_{-\infty}^{\infty}  e^{-t^2}H_n'H_m'~dt
+\end{align*}
+Therefore
+\begin{align*}
+    \int_{-\infty}^\infty H_m(e^{-t^2}H_n')' - H_n(e^{-t^2}H_m')'~dt = 
+    2(m-n)\int_{-\infty}^\infty e^{-t^2}H_nH_m~dt = 0
+\end{align*}
+Hence
+\begin{align*}
+    \inprd{e_n, e_m}
+    &= A_nA_m\int_{-\infty}^{\infty}  e^{-t^2}H_n H_m~dt
+    = 0
+\end{align*}
+Which impliest that the functions $e_n(t)$ are orthogonal.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{11.}}\\
+Let us consider the LHS of the equation as follows
+\begin{align*}
+    \frac{1}{1 - w} e^{-tw/(1-w)}
+    &= \frac{1}{1 - w}\sum_{n=0}^\infty \frac{1}{n!}\bigg(-\frac{tw}{1-w}\bigg)^n\\
+    &= \sum_{n=0}^\infty \frac{1}{n!}\frac{(-1)^nw^n}{(1-w)^{n+1}}t^n
+\end{align*}
+Using the series expansion for $1/(1-w)^{n+1}$ we get that
+\begin{align*}
+    \frac{1}{1 - w} e^{-tw/(1-w)}
+    &= \sum_{n=0}^\infty \frac{1}{n!}(-1)^nw^n t^n
+    \sum_{k=0}^\infty\binom{k+n}{k} w^{k}\\
+    &= \sum_{n=0}^\infty \sum_{k=0}^\infty
+    \frac{(-1)^n}{n!}\binom{k+n}{k} w^{n+k}t^n\\
+    &= \sum_{n=0}^\infty \sum_{j=n}^\infty
+    \frac{(-1)^n}{n!}\binom{j}{n} w^{j}t^n
+\end{align*}
+Where in the last step we changed variables so $j = k + n$ and hence the sum
+starts at $j = n$.\\
+If $n = 0$ then $j$ can go from 0 to $\infty$, if $n = 1$ then $j$ can go from
+$1$ to $\infty$ and so on. If we swap the summation signs for $j = 0$ then
+$n$ can only be 0, for $j = 1$ then $n$ can only be 0 or 1 and so on, then
+must be that
+\begin{align*}
+    \frac{1}{1 - w} e^{-tw/(1-w)}
+    &= \sum_{j=0}^\infty \sum_{n=0}^j
+    \frac{(-1)^n}{n!}\binom{j}{n} w^{j}t^n
+\end{align*}
+Or renaming variables $n \to j$ and $j \to n$ we get that
+\begin{align*}
+    \frac{1}{1 - w} e^{-tw/(1-w)}
+    &= \sum_{n=0}^\infty \sum_{j=0}^n
+    \frac{(-1)^j}{j!}\binom{n}{j} t^j w^{n}
+\end{align*}
+But from equation (10c) we know that
+\begin{align*}
+    L_n(t) = \sum_{j=0}^n \frac{(-1)^j}{j!} \binom{n}{j}t^j
+\end{align*}
+Therefore
+\begin{align*}
+    \frac{1}{1 - w} e^{-tw/(1-w)}
+    &= \sum_{n=0}^\infty L_n(t) w^{n}
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{12.}}\\
+\begin{itemize}
+\item [(a)] Let us differentiate $\psi$ with respect to $w$
+\begin{align*}
+    \dv{\psi(t,w)}{w} &= \dv{w}(\frac{1}{1 - w}e^{-tw/(1-w)})\\
+    &= \frac{1}{(1 - w)^2}e^{-tw/(1-w)}
+    - \frac{1}{(1-w)}\frac{te^{-tw/(1-w)}}{(1 - w)^2}\\
+    &= \frac{1}{1-w}\sum_{n=0}^\infty L_n w^n
+    - \frac{t}{(1-w)^2}\sum_{n=0}^\infty L_{n} w^n
+\end{align*}
+From the RHS we have that
+\begin{align*}
+    \dv{w}(\sum_{n=0}^\infty L_n w^n) &= \sum_{n=1}^\infty n L_n w^{n-1}
+    = \sum_{n=0}^\infty (n + 1) L_{n + 1} w^{n}
+\end{align*}
+So
+\begin{align*}
+    (1 - w)\sum_{n=0}^\infty L_n w^n
+    - t\sum_{n=0}^\infty L_{n} w^n
+    &= (1 - w)^2\sum_{n=0}^\infty (n + 1) L_{n + 1} w^{n}
+\end{align*}
+Hence
+\begin{align*}
+    &\sum_{n=0}^\infty L_n w^n - \sum_{n=0}^\infty L_n w^{n+1}
+    - t\sum_{n=0}^\infty L_{n} w^n
+    =\\
+    &= \sum_{n=0}^\infty (n + 1) L_{n + 1} w^{n}
+    -2\sum_{n=0}^\infty (n + 1) L_{n + 1} w^{n+1}
+    +\sum_{n=0}^\infty (n + 1) L_{n + 1} w^{n+2}\\[6pt]
+    %
+    &(1 - t)\sum_{n=0}^\infty L_{n} w^n
+    - \sum_{n=1}^\infty L_{n-1} w^{n}
+    =\\
+    &= \sum_{n=0}^\infty (n + 1) L_{n + 1} w^{n}
+    -2\sum_{n=1}^\infty nL_{n} w^{n}
+    +\sum_{n=2}^\infty (n - 1) L_{n-1} w^{n}
+\end{align*}
+If we make every summation to start from $n=2$ then 
+\begin{align*}
+    &A + (1 - t)\sum_{n=2}^\infty L_{n} w^n
+    - \sum_{n=2}^\infty L_{n-1} w^{n}
+    =\\
+    &= B + \sum_{n=2}^\infty (n + 1) L_{n + 1} w^{n}
+    -2\sum_{n=2}^\infty nL_{n} w^{n}
+    +\sum_{n=2}^\infty (n - 1) L_{n-1} w^{n}
+\end{align*}
+Where
+\begin{align*}
+    A &= (1 - t)[L_0 + L_1w] - L_0w\\
+    B &= L_1 + 2L_2w - 2L_1w
+\end{align*}
+Considering only what happens for $n \geq 2$ we can collapse the summations
+into one summation which is equal to 0, then must be that each term is equal
+to 0, so
+\begin{align*}
+    (n + 1) L_{n + 1} -2 nL_{n} + (n - 1) L_{n-1}
+    - (1 - t)L_{n} + L_{n-1} &= 0\\
+    (n + 1) L_{n + 1} -2 nL_{n} + nL_{n-1} - L_{n-1}
+    - L_n + tL_{n} + L_{n-1} &= 0\\
+    (n + 1) L_{n + 1} -(2n + 1 - t)L_{n} + nL_{n-1} &= 0
+\end{align*}
+The last equation is the relation we are looking for.
+\item[(b)] Let us differentiate $\psi$ with respect to $t$
+\begin{align*}
+    \dv{\psi(t,w)}{t} &= \dv{t}(\frac{1}{1 - w}e^{-tw/(1-w)})\\
+    &= -\frac{we^{-tw/(1-w)}}{(1 - w)^2}\\
+    &= -\frac{w}{1 - w}\sum_{n=0}^\infty L_n w^n
+\end{align*}
+From the RHS we have that
+\begin{align*}
+    \dv{t}(\sum_{n=0}^\infty L_n w^n) &= \sum_{n=1}^\infty L_n' w^{n}
+\end{align*}
+Where we start from 1 now since $L_0 = 1$ then
+\begin{align*}
+    -\frac{w}{1 - w}\sum_{n=0}^\infty L_n w^n
+    &= \sum_{n=1}^\infty L_n' w^{n}\\
+    -w\sum_{n=0}^\infty L_n w^n
+    &= (1 - w)\sum_{n=1}^\infty L_n' w^{n}\\
+    -\sum_{n=0}^\infty L_n w^{n+1}
+    &= \sum_{n=1}^\infty L_n' w^{n}  - \sum_{n=1}^\infty L_n' w^{n+1}\\
+    -\sum_{n=1}^\infty L_{n-1} w^{n}
+    &= \sum_{n=1}^\infty L_n' w^{n}  - \sum_{n=2}^\infty L_{n-1}' w^{n}\\
+    L_0w + \sum_{n=2}^\infty L_{n-1} w^{n}
+    &=  - L_1'w + \sum_{n=2}^\infty L_{n-1}' w^{n} - \sum_{n=2}^\infty L_n' w^{n}
+\end{align*}
+If we only consider the case when $n \geq 2$ then we get the following relation
+\begin{align*}
+    L_{n-1} &= L_{n-1}' - L_n'
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{13.}}\\
+Let us write equation (b) for $n + 1$, we see that
+\begin{align*}
+    L_n(t) &= L'_n(t) - L'_{n+1}(t)\\
+    L'_{n+1}(t) &= L'_n(t) - L_{n}(t)
+\end{align*}
+Also, taking the derivative of equation (a) with respect to $t$ we get that
+\begin{align*}
+    (n+1)L'_{n+1}(t) - (2n + 1)L'_n(t) + tL'_n(t) + L_n(t) + nL'_{n-1}(t) &= 0
+\end{align*}
+Replacing $L'_{n+1}(t)$ we get that
+\begin{align*}
+    (n+1)(L'_{n}(t) - L_n(t)) - (2n + 1)L'_n(t) + tL'_n(t)
+    + L_n(t) + nL'_{n-1}(t) &= 0 \\
+    nL'_{n}(t) + L'_{n}(t) - nL_n(t) - L_n(t) - 2nL'_n(t) - L'_n(t) + tL'_n(t)
+    + L_n(t) + nL'_{n-1}(t) &= 0 \\
+    - nL_n(t) - nL'_n(t) + tL'_n(t) + nL'_{n-1}(t) &= 0
+\end{align*}
+Now, applying again equation (b) to replace $L'_{n-1}(t)$ we have that
+\begin{align*}
+    - nL_n(t) - nL'_n(t) + tL'_n(t) + n(L_{n-1}(t) + L'_n(t)) &= 0 \\
+    - nL_n(t)  + tL'_n(t) + nL_{n-1}(t) &= 0
+\end{align*}
+Therefore
+\begin{align*}
+    tL'_n(t) &= nL_n(t) - nL_{n-1}(t) &  &(c)
+\end{align*}
+We know that Laguerre's differential equation is 
+\begin{align*}
+    tL''_{n} + (1 - t)L'_n + nL_n = 0
+\end{align*}
+Also, differentiating equation (c) with respect to $t$ we have that
+\begin{align*}
+    tL''_n + L'_n &= nL'_n - nL'_{n-1}
+\end{align*}
+Replacing this and equation (c), we see that
+\begin{align*}
+    tL''_{n} + (1 - t)L'_n + nL_n 
+    &= nL'_n - nL'_{n-1} - nL_n + nL_{n-1} + nL_n\\
+    &= nL'_n - nL'_{n-1} + nL_{n-1}\\
+    &= nL'_n - nL'_{n-1} + n(L'_{n-1} - L'_n)\\
+    &= 0
+\end{align*}
+Where we also replaced $L_{n-1}$ with equation (b).\\
+We see then that $L_n$ satisfies Laguerre's differential equation.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{14.}}\\
+Let us consider the functions 
+\begin{align*}
+    e_n(t) = e^{-t/2}L_n(t)
+\end{align*}
+We want to show they have norm 1 so we need to compute
+$\|e_n\| = \sqrt{\inprd{e_n, e_n}}$ as follows
+\begin{align*}
+    \|e_n\|^2 = \int_0^\infty e^{-t}L_n(t) L_n(t)~dt
+\end{align*}
+We know that $L_n(t)$ is a polynomial of degree $n$, also, we know from
+Problem 15 that if $m < n$ then $\int_0^\infty e^{-t}t^m L_n(t)~dt = 0$
+so the only term surviving from $L_n(t)$ in our integral is the term of degree
+$n$ i.e.
+\begin{align*}
+    \|e_n\|^2 &= \int_0^\infty e^{-t}L_n(t) L_n(t)~dt
+    = \alpha\int_0^\infty e^{-t}t^n L_n(t)~dt
+\end{align*}
+Where $\alpha$ is the coefficient of $t^n$. We can determine it using equation
+(10c), where we see that $\alpha = (-1)^n/n!$.
+Then
+\begin{align*}
+    \|e_n\|^2 &= \frac{(-1)^n}{n!}\int_0^\infty e^{-t}t^n L_n(t)~dt\\
+    &= \frac{(-1)^n}{n!}\int_0^\infty e^{-t}t^n \frac{e^{t}}{n!}f^{(n)}(t)~dt\\
+    &= \frac{(-1)^n}{(n!)^2}\int_0^\infty t^nf^{(n)}(t)~dt\\
+    &= \frac{(-1)^n}{(n!)^2}\bigg[
+    t^nf^{(n-1)}(t)\bigg|_{0}^\infty - n\int_0^\infty t^{n-1}f^{(n-1)}(t)~dt
+    \bigg]\\
+    &= \frac{n(-1)^{n+1}}{(n!)^2}\int_0^\infty t^{n-1}f^{(n-1)}(t)~dt
+\end{align*}
+Where we used that $f(t) = t^n e^{-t}$ and we integrated by parts.
+So, integrating by parts $n$ times we get that
+\begin{align*}
+    \|e_n\|^2
+    &= \frac{n!(-1)^{2n}}{(n!)^2}\int_0^\infty f^{(0)}(t)~dt
+    = \frac{1}{n!}\int_0^\infty t^n e^{-t}~dt
+\end{align*}
+We apply integration by parts again setting $u = t^n$ and $dv = e^{-t} dt$,
+hence
+\begin{align*}
+    \|e_n\|^2
+    &= \frac{1}{n!}\bigg[ -t^ne^{-t}\bigg|_0^\infty
+    + n\int_0^\infty t^{n-1} e^{-t}~dt\bigg]
+    = \frac{n}{n!} \int_0^\infty t^{n-1} e^{-t}~dt
+\end{align*}
+Therefore, again applying integration by parts $n$ times we get that
+\begin{align*}
+    \|e_n\|^2
+    = \frac{n!}{n!} \int_0^\infty e^{-t}~dt = 1
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{15.}}\\
+We want to show that the functions 
+\begin{align*}
+    e_n(t) = e^{-t/2}L_n(t)
+\end{align*}
+constitute an orthogonal sequence in the space $L^2[0, +\infty)$.\\
+First, we want to compute the integral $\int_0^\infty e^{-t}t^m L_n(t)~dt$
+where $m < n$.\\
+Let us define $f(t) = t^ne^{-t}$ so $L_n(t) = e^tf^{(n)}(t)/n!$, then
+\begin{align*}
+    \int_0^\infty e^{-t}t^m L_n(t)~dt
+    &= \frac{1}{n!}\int_0^\infty t^m f^{(n)}(t)~dt \\
+    &= \frac{1}{n!}\bigg[
+        t^mf^{(n-1)}(t) \bigg|_0^\infty
+        - \int_0^\infty mt^{m-1} f^{(n-1)}(t)~dt
+    \bigg]\\
+    &= -\frac{m}{n!}\int_0^\infty t^{m-1} f^{(n-1)}(t)~dt
+\end{align*}
+Where we applied integration by parts and we used that $f^{(n)}(t)$ is of the
+form $f^{(n)}(t) = e^{-t} p_n(t)$ where $p_n(t)$ is a polynomial of degree $n$
+and when $t \to \infty $ we see that $f^{(n)}(t) \to 0$.\\
+Applying integration by parts $m$ times we get that
+\begin{align*}
+    \int_0^\infty e^{-t}t^m L_n(t)~dt
+    &= (-1)^m\frac{m!}{n!}\int_0^\infty f^{(n-m)}(t)~dt\\
+    &= (-1)^m(n - m)! \bigg[f^{(n-m-1)}(t)\bigg]_{0}^\infty
+\end{align*}
+We note that since $n - m - 1 < n$ then the $n-m-1$ derivative of
+$f(t) = t^ne^{-t}$ is not going to have yet a constant term so we have
+that $f^{(n-m-1)}(t)|_{t=0} = 0$ and we know that $f^{(n-m-1)}(t) \to 0$
+when $t \to \infty$, therefore
+\begin{align*}
+    \int_0^\infty e^{-t}t^m L_n(t)~dt &= 0
+\end{align*}
+If we take $L_m(t)$ with $m < n$ then $L_m(t)$ is a polynomial of degree
+smaller than $n$ and hence
+\begin{align*}
+    \inprd{e_n(t), e_m(t)} &= \int_0^\infty e^{-t}L_{m}(t) L_n(t)~dt = 0
+\end{align*}
+Therefore the functions $e_n(t)$ constitute an orthogonal sequence in the space
+$L^2[0,+\infty)$.
+
 \end{proof}
 \end{document}
