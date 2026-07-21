@@ -2416,6 +2416,454 @@ smaller than $n$ and hence
 \end{align*}
 Therefore the functions $e_n(t)$ constitute an orthogonal sequence in the space
 $L^2[0,+\infty)$.
+\end{proof}
 
+\cleardoublepage
+\subsection*{3.8 - Functionals on Hilbert Spaces}
+\begin{proof}{\textbf{1.}}\\
+Let us consider the Hilbert space $\R^3$ with the dot product as our definition
+of inner product.\\
+Let $f$ be a linear functional on $\R^3$, if $x \in \R^3$ we see that
+\begin{align*}
+    |f(x)|
+    &= |\xi_1 f(e_1) + \xi_2 f(e_2) + \xi_3 f(e_3)|\\
+    &= \bigg|\sum_{i=1}^3 \xi_i f(e_i)\bigg|\\
+    &\leq \sum_{i=1}^3 |\xi_i f(e_i)|\\
+    &\leq \sqrt{\sum_{i=1}^3 |\xi_i|^2} \sqrt{\sum_{i=1}^3 |f(e_i)|^2}\\
+    &\leq \|x\| \sqrt{\sum_{i=1}^3 |f(e_i)|^2}
+\end{align*}
+Where we used the linearity of $f$ and the Cauchy-Schwartz inequality.\\
+So, there exists a real number $c = \sqrt{\sum_{i=1}^3 |f(e_i)|^2}$ such that
+\begin{align*}
+    |f(x)| \leq c \|x\|
+\end{align*}
+i.e. $f$ is bounded.\\
+Therefore, by Riesz's theorem we know that $f$ can be represented in terms of
+the inner product
+\begin{align*}
+    f(x) = \inprd{x, z} = x\cdot z
+    = \xi_{1}\zeta_1 + \xi_{2}\zeta_2 + \xi_{3}\zeta_3
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{2.}}\\
+Let $f$ be a bounded linear functional on $l^2$, since $l^2$ is a Hilbert space
+with the inner product defined as
+\begin{align*}
+    \inprd{x,y} = \sum_{j=1}^\infty \xi_j \overline{\eta}_j
+\end{align*}
+Then by Riesz's theorem we get that $f$ can be represented in terms of the
+inner product as follows
+\begin{align*}
+    f(x) = \inprd{x,z} = \sum_{j=1}^\infty \xi_j \overline{\zeta}_j
+\end{align*}
+Where $z = (\zeta_j) \in l^2$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{3.}}\\
+Let $z$ be any fixed element of an inner product space $X$ and let us define
+$f(x) = \inprd{x, z}$. If $x_1, x_2 \in X$ and $\alpha, \beta$ are scalars
+we see that
+\begin{align*}
+    f(\alpha x_1 + \beta x_2) &= \inprd{\alpha x_1 + \beta x_2, z} \\
+    &= \alpha\inprd{x_1, z} + \beta\inprd{x_2, z}\\
+    &= \alpha f(x_1) + \beta f(x_2)
+\end{align*}
+So $f$ is a linear functional, also from Schwartz inequality we have that
+\begin{align*}
+    |f(x)| = |\inprd{x,z}| \leq \|x\| \|z\|
+\end{align*}
+since $z$ is fixed then setting $c = \|z\|$ shows us that $f$ is bounded.\\
+We know that the norm of $f$ is defined as 
+\begin{align*}
+    \|f\| = \sup_{\substack{x \in X \\ x \neq 0}} \frac{|f(x)|}{\|x\|}
+\end{align*}
+From the previous equation we note that
+\begin{align*}
+    \|f\| = \sup_{\substack{x \in X \\ x \neq 0}} \frac{|f(x)|}{\|x\|}
+    \leq \|z\|
+\end{align*}
+Also, we know that $|f(x)| \leq \|f\|\|x\|$ so if we take $x = z$
+we have that
+\begin{align*}
+    |f(z)| = |\inprd{z,z}| = \|z\|^2 \leq \|f\|\|z\|
+\end{align*}
+Hence $\|z\| \leq \|f\|$, but then must be that
+\begin{align*}
+    \|f\| = \|z\|
+\end{align*}
+Therefore, $f$ is a bounded linear functional on $X$ of norm $\|z\|$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{4.}}\\
+Let us consider the mapping $h:X \to X'$ such that $h:z \to f = \inprd{\cdot, z}$
+is surjective.\\
+We know that $X$ is an inner product space, so to show that $X$ is a Hilbert
+space we need to show that $X$ is complete.\\
+We show first that $h$ is injective, let us consider $f_1, f_2 \in X'$ which 
+are associated to $z_1, z_2 \in X$ and suppose that $f_1 = f_2$ i.e.
+$\inprd{x,z_1} = \inprd{x, z_2}$ for all $x \in X$ then
+\begin{align*}
+    \inprd{x,z_1} - \inprd{x, z_2} &= 0\\
+    \inprd{x,z_1 - z_2} &= 0
+\end{align*}
+If we take $x = z_1 - z_2$ then we get that
+\begin{align*}
+    \inprd{x,z_1 - z_2} &= \|z_1 - z_2\|^2 = 0
+\end{align*}
+hence $z_1 - z_2 = 0$ so $z_1 = z_2$, which implies that $h$ is injective and
+also bijective.\\
+On the other hand, we know that the norm of $f$ associated with $z$ is
+$\|f\| = \|\inprd{\cdot, z}\| = \|z\|$ so the norm is preserved.\\
+Let $(f_{z_n})\subset X'$ be a Cauchy sequence, where each functional $f_{z_n}$
+is associated to a $z_n \in X$, then $\|f_{z_n} - f_{z_m}\| \to 0$. Since each 
+functional is linear then we have that
+\begin{align*}
+    \|f_{z_n} - f_{z_m}\| = \|f_{z_n - z_m}\| = \|z_n - z_m\|
+\end{align*}
+This shows us that $(z_n)$ is also a Cauchy sequence in $X$. \\
+But since the space $X'$ (the dual space) is complete then the sequence
+$(f_{z_n})$ must converge, which implies that $(z_n)$ converges.\\
+Therefore $X$ must be a Hilbert space.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{5.}}\\
+Let us consider the real space $l^2$.\\
+By definition the dual space of $l^2$, named $(l^2)'$, is the set of all
+bounded linear functionals on $l^2$.\\
+So if $f \in (l^2)'$ then by Riesz's theorem we know that $f$ can be
+represented as $f(x) = \inprd{x, z}$.\\
+We want to show that the map $h: z \to \inprd{\cdot, z}$ is an isomorphism.\\
+We note that for every element $\inprd{\cdot, z} \in (l^2)'$ there is an
+associated $z \in l^2$, so the map $h$ is surjective.\\
+We proved in Problem 4 that $h$ is injective, and therefore it's bijective.\\
+Also, the norm is preserved since by Riesz's theorem we know that
+$\|f\| = \|z\|$.\\
+Therefore, $h$ is an isomorphism between $l^2$ and $(l^2)'$ which implies that
+the dual space of $l^2$ is $l^2$.    
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{6.}}\\
+We have shown in Problem 4 and 5 that the map $z \to f_z =\inprd{\cdot, z}$ is
+a bijection. Also, by Riesz's Theorem we know that $\|z\| = \|f_z\|$ so
+it's actually an isometric bijection.\\
+We note that if $\alpha z + \beta v \in H$ then the map takes this element to
+$f_{\alpha z + \beta v} = \inprd{\cdot, \alpha z + \beta v} \in H'$ and hence
+\begin{align*}
+    f_{\alpha z + \beta v}
+    = \inprd{\cdot, \alpha z + \beta v}
+    &= \inprd{\cdot, \alpha z} + \inprd{\cdot, \beta v}
+    = \overline{\alpha}\inprd{\cdot, z} + \overline{\beta}\inprd{\cdot, v}
+    = \overline{\alpha}f_z + \overline{\beta}f_{v}
+\end{align*}
+Where we used the properties of the inner product.\\
+Therefore, the map is conjugate linear.
+$$\ket{a} \to \braket{\cdot}{a}$$
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{7.}}\\
+We know that the dual space of a normed space is a Banach space, so since $H$
+is a Hilbert space and hence has an inner product that defines a norm on it
+then the dual space $H'$ is a Banach space i.e. it's complete.\\
+In addition to that, let us define the inner product map on $H'$ as
+\begin{align*}
+    \inprd{f_z, f_v}_1 = \overline{\inprd{z,v}} = \inprd{v,z}
+\end{align*}
+where $f_z(x) = \inprd{x,z}$ and $f_v(x) = \inprd{x,v}$.\\
+Since, essentially the inner product $\inprd{f_z, f_v}_1$ is defined in terms 
+of the inner product of the elements $v,z \in H$ then it must satisfy every
+property of the inner product and hence it's a proper inner product over $H'$.\\
+Therefore, $H'$ is a Hilbert space.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{8.}}\\
+From Problem 6 we know that there exists an isometric bijection
+$z \to f_z$ from $H$ to $H'$, also, from Problem 7 we know that the dual 
+space $H'$ is also a Hilbert space with the inner product defined as 
+\begin{align*}
+    \inprd{f_z, f_v}_1 = \inprd{v, z}
+\end{align*}
+If we consider now the second dual space $H'' = (H')'$ because of Riesz's
+theorem we know that any bounded linear functional on $H'$ can be represented
+in terms of the inner product of $H'$, namely
+\begin{align*}
+    g_{f_z}(f_x) = \inprd{f_x, f_z}_1 = \inprd{z, x}
+\end{align*}
+Where the norm has the following property $\|g_{f_z}\| = \|f_z\| = \|z\|$.\\
+Let us consider now the map $h: z \to g_{f_z}$.
+Suppose $g_{f_v} = g_{f_z}$ then
+\begin{align*}
+    \inprd{f_x, f_v} - \inprd{f_x, f_z} &= 0 \\
+    \inprd{v, x} - \inprd{z, x} &= 0 \\
+    \inprd{v - z, x} &= 0
+\end{align*}
+If we let $x = v - z$ then
+\begin{align*}
+    \inprd{v - z, v - z} &= \|v - z\|^2 = 0
+\end{align*}
+Then $v - z = 0$ so $v = z$, which implies that the map $h$ is injective. \\
+Also, we know that the map $z \to f_z$ is surjective, then the map
+$f_z \to g_{f_z}$ is also surjective and hence $h$ is surjective and therefore
+bijective.\\
+Finally, if we define the norm on $H''$ as we did for $H'$ we get that
+\begin{align*}
+    \inprd{g_{f_v}, g_{f_z}}_2 = \inprd{f_z, f_v}_1 = \inprd{v, z}
+\end{align*}
+Which implies that the map $h$ is an isomorphism between $H$ and $H''$
+and therefore $H$ and $H''$ are isomorphic.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{10.}}\\
+Let us consider the inner product $\inprd{\cdot, \cdot}$ as a map from 
+$X\times X$ to a field $K$ where $X$ is any inner product space. \\
+Let $x, y, x_1, y_1, x_2, y_2 \in X$ then, we note that
+\begin{align*}
+    \inprd{x_1 + x_2, y} &= \inprd{x_1, y} + \inprd{x_2, y} \\
+    \inprd{x, y_1 + y_2} &= \inprd{x, y_1} + \inprd{x, y_2} \\
+    \inprd{\alpha x, y} &= \alpha\inprd{x, y} \\
+    \inprd{x, \beta y} &= \overline{\beta}\inprd{x, y}
+\end{align*}
+Where we used only the inner product properties.\\
+By Schwarz inequality we have that
+\begin{align*}
+    |\inprd{x,y}| \leq \|x\|\|y\|
+\end{align*}
+Therefore $\inprd{\cdot, \cdot}$ is a bounded sesquilinear form. \\
+We see that
+\begin{align*}
+    \|\inprd{\cdot, \cdot}\|
+    = \sup_{\substack{x \in X\\ x \neq 0}} \frac{|\inprd{x,y}|}{\|x\|\|y\|}
+    \leq 1
+\end{align*}
+Also, we know that
+\begin{align*}
+    |\inprd{x,y}| \leq \|\inprd{\cdot, \cdot}\| \|x\|\|y\|
+\end{align*}
+Then taking $y = x$ and dividing by $\|x\|\|y\|$ we get that
+\begin{align*}
+    1 = \frac{\|x\|^2}{\|x\|\|x\|} 
+    = \frac{|\inprd{x,x}|}{\|x\|\|x\|} \leq \|\inprd{\cdot, \cdot}\| 
+\end{align*}
+Therefore, must be that
+\begin{align*}
+    \|\inprd{\cdot, \cdot}\| = 1
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{11.}}\\
+Let $X$ be a vector sapce and $h$ a sesquilinear form on $X \times X$.
+We want to show that $f_1(x) = h(x, y_0)$ with fixed $y_0$ defines a linear
+functional $f_1$ on $X$ and so does $f_2(y) = \overline{h(x_0, y)}$ with fixed
+$x_0$.\\
+Since by definition $h: X\times X \to K$ then given a fixed $y_0 \in X$
+we see that $f_1: X \to K$.\\
+Let $x_1, x_2 \in X$ and $\alpha, \beta \in K$ where $K$ is a field,
+then we see that
+\begin{align*}
+    f_1(\alpha x_1 + \beta x_2)
+    &= h(\alpha x_1 + \beta x_2, y_0) \\
+    &= \alpha h(x_1, y_0) + \beta h(x_2, y_0) \\
+    &= \alpha f_1(x_1) + \beta f_1(x_2)
+\end{align*}
+Where we used the properties of the sesquilinear form $h$.\\
+Therefore $f_1$ defines a linear functional on $X$.\\
+In the case of $f_2$, given $y_1, y_2 \in X$, we see that
+\begin{align*}
+    f_2(\alpha y_1 + \beta y_2)
+    &= \overline{h(x_0, \alpha y_1 + \beta y_2)} \\
+    &= \overline{\overline{\alpha} h(x_0, y_1)}
+    + \overline{\overline{\beta} h(x_0, y_2)} \\
+    &= \alpha \overline{h(x_0, y_1)}
+    + \beta\overline{h(x_0, y_2)} \\
+    &= \alpha f_2(y_1) + \beta f_2(y_2)
+\end{align*}
+Therefore $f_2$ also defines a linear functional on $X$.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{12.}}\\
+Let $X$ and $Y$ be normed spaces and let $h:X \times Y \to K$ be a bounded
+sesquilinear form. \\
+Let us consider $x_0 \in X$, $y_0 \in Y$ and $\epsilon > 0$ then let us
+consider all the $x \in X$ and $y \in Y$ such that
+\begin{align*}
+    \|x - x_0\| < \delta
+    \quad \text{and } \quad
+    \|y - y_0\| < \delta
+\end{align*}
+Where
+\begin{align*}
+    \delta = \frac{\epsilon}{\|h\|(1 + \|x_0\| + \|y_0\|)}
+\end{align*}
+We note that
+\begin{align*}
+    |h(x,y) - h(x_0, y_0)| &= |h(x,y) - h(x_0,y) + h(x_0,y) - h(x_0, y_0)|\\
+    &= |h(x -x_0,y) + h(x_0,y- y_0)|\\
+    &\leq |h(x -x_0,y)| + |h(x_0,y- y_0)|
+\end{align*}
+Since $h$ is bounded we have that
+\begin{align*}
+    |h(x,y) - h(x_0, y_0)|
+    &\leq |h(x -x_0,y)| + |h(x_0,y- y_0)| \\
+    &\leq \|h\|\|x -x_0\|\|y\| + \|h\|\|x_0\|\|y -y_0\| \\
+    &\leq \|h\|\|x -x_0\|\|y -y_0\|
+    + \|h\|\|x -x_0\|\|y_0\|
+    + \|h\|\|x_0\|\|y -y_0\| \\
+    &< \|h\|(\delta^2 + \delta(\|y_0\| + \|x_0\|))
+\end{align*}
+Where we used that
+\begin{align*}
+    \|y\| \leq \|y -y_0\| + \|y_0\|
+\end{align*}
+If we choose $\delta < 1$ then $\delta^2 < \delta$ and hence
+\begin{align*}
+    |h(x,y) - h(x_0, y_0)|
+    &< \|h\|\delta(1 + \|y_0\| + \|x_0\|)
+    = \epsilon
+\end{align*}
+Therefore $h$ is jointly continuous.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{13.}}\\
+Let $h:X\times X \to K$ be a Hermitian sesquilinear form, then if $K = \R$ we
+have that $\overline{h(y, x)} = h(y,x)$ and hence the last condition is
+\begin{align*}
+    h(x, y) = h(y, x)
+\end{align*}
+We note that
+\begin{align*}
+    h(x, \alpha y) &= h(\alpha y, x) = \alpha h(y, x) = \alpha h(x, y) \\
+    h(z, x + y) &= h(x + y, z) = h(x, z) + h(y, z) = h(z, x) + h(z, y)
+\end{align*}
+So $h$ becomes a bilinear function. \\
+For $h$ to be an inner product we need to add the following conditions
+\begin{align*}
+    &h(x,x) \geq 0 \\
+    &h(x,x) = 0 \quad\text{ if and only if }\quad x = 0
+\end{align*}
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{14.}}\\
+Let $X$ be a vector space and $h$ a Hermitian form on $X \times X$ such that
+it is positive semidefinite i.e. $h(x,x) \geq 0$ for all $x \in X$. \\
+Let $x,y \in X$ and $\alpha \in K$, and let us consider the case when
+$h(y,y) > 0$. \\
+We note that
+\begin{align*}
+    0 \leq h(x - \alpha y, x - \alpha y)
+    &= h(x, x - \alpha y) - \alpha h(y, x - \alpha y) \\
+    &= \overline{h(x - \alpha y, x)} - \alpha \overline{h(x - \alpha y, y)} \\
+    &= \overline{h(x, x)} - \overline{\alpha h(y, x)}
+    - \alpha \overline{h(x, y)} + \alpha\overline{\alpha h(y, y)} \\
+    &= h(x, x) - \overline{\alpha} h(x,y)
+    - \alpha h(y, x) + \alpha\overline{\alpha}h(y, y) \\
+    &= h(x, x) - \overline{\alpha} h(x,y)
+    - \alpha [h(y, x) - \overline{\alpha}h(y, y)]
+\end{align*}
+Let us choose $\overline{\alpha} = h(y,x)/h(y,y)$, then we get that
+\begin{align*}
+    0 &\leq h(x, x) - \frac{h(y,x)}{h(y,y)}h(x,y) \\
+    0 &\leq h(x, x) - \frac{\overline{h(x,y)}}{h(y,y)}h(x,y) \\
+    0 &\leq h(x, x) - \frac{|h(x,y)|^2}{h(y,y)}
+\end{align*}
+Multiplying by $h(y,y)$ we have that
+\begin{align*}
+    0 &\leq h(x, x)h(y, y) - |h(x,y)|^2
+\end{align*}
+Hence
+\begin{align*}
+    |h(x,y)|^2 &\leq h(x, x)h(y, y)
+\end{align*}
+If $h(y,y) = 0$ we may repeat the same argument but considering instead
+$h(y - \alpha x, y - \alpha x)$, for which we get that
+\begin{align*}
+    0 \leq h(y - \alpha x, y - \alpha x)
+    &= - \overline{\alpha} h(y,x)
+    - \alpha [h(x, y) - \overline{\alpha}h(x, x)]
+\end{align*}
+And taking $\overline{\alpha} = h(x,y)/h(x,x)$ we get  that
+\begin{align*}
+    0 &\leq -\frac{h(x,y)}{h(x,x)} h(y,x) \\
+    |h(x,y)|^2 &\leq 0
+\end{align*}
+Therefore $|h(x,y)|^2 = 0$ which is the expected result. \\
+Finally, the last case to take into account is $h(x,x) = h(y,y) = 0$.
+We see that
+\begin{align*}
+    0 \leq h(x + y, x + y) &= h(x,x) + h(x, y) + h(y, x) + h(y, y) \\
+    &=  h(x, y) + h(y, x)
+\end{align*}
+and that
+\begin{align*}
+    0 \leq h(x - y, x - y) &= h(x,x) - h(x,y) - h(y, x) + h(y,y)\\
+    &=  -h(x, y) - h(y, x)
+\end{align*}
+Then $h(x, y) + h(y, x) \leq 0$, therefore, must be that
+\begin{align*}
+    h(x, y) + h(y, x) &= 0 \\
+    h(x, y) + \overline{h(x, y)}&= 0
+\end{align*}
+This implies that $\Re{h(x,y)} = 0$.\\
+Also, let us consider $h(ix,y)$, we note that 
+\begin{align*}
+    0 &= \Re{h(ix, y)} \\
+    &= \Re{ih(x, y)} \\
+    &= \Re{i(\Re{h(x, y)} + i\Im{h(x,y)})} \\
+    &= \Re{i\Re{h(x, y)} - \Im{h(x,y)}} \\
+    &= -\Im{h(x,y)}
+\end{align*}
+Therefore $h(x,y) = 0$ and hence the Schwarz inequality
+\begin{align*}
+    |h(x,y)|^2 \leq h(x,x) h(y,y)
+\end{align*}
+is satisfied.
+\end{proof}
+
+\cleardoublepage
+\begin{proof}{\textbf{15.}}\\
+Let $h$ be a Hermitian form such that $h(x,x) \geq 0$ for every $x \in X$ and
+let us define $p(x) = +\sqrt{h(x,x)}$.\\
+We see that $p(x) \geq 0$ by definition so $p(x)$ satisfies (N1) property.\\
+We note that
+\begin{align*}
+    p(\alpha x) = \sqrt{h(\alpha x, \alpha x)}
+    = \sqrt{\alpha \overline{\alpha}h(x, x)} 
+    = \sqrt{|\alpha|^2 h(x, x)} 
+    = |\alpha|\sqrt{ h(x, x)} = |\alpha|p(x)
+\end{align*}
+So $p(x)$ satisfies (N3) property. Also, let $x,y \in X$, we see that
+\begin{align*}
+    p(x + y)^2 &= h(x + y, x + y)
+    = h(x,x) + 2\Re{h(x,y)} + h(y,y)
+\end{align*}
+Since $\Re{h(x,y)} \leq |h(x,y)|$ then
+\begin{align*}
+    p(x + y)^2
+    &\leq h(x,x) + 2|h(x,y)| + h(y,y)
+\end{align*}
+But also because Schwarz inequality is satisfied by $h$ we have that
+\begin{align*}
+    p(x + y)^2
+    &\leq h(x,x) + 2|h(x,y)| + h(y,y) \\
+    &\leq h(x,x) + 2\sqrt{h(x,x)h(y,y)} + h(y,y) \\
+    &\leq p(x)^2 + 2p(x)p(y) + p(y)^2 \\
+    &\leq (p(x) + p(y))^2
+\end{align*}
+Therefore
+\begin{align*}
+    p(x + y) \leq p(x) + p(y)
+\end{align*}
+So $p(x)$ satisfies (N4) property and hence $p(x)$ defines a seminorm on $X$.
 \end{proof}
 \end{document}
